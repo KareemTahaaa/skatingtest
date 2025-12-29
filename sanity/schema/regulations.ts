@@ -195,19 +195,6 @@ export default defineType({
               validation: (Rule) => Rule.required(),
             }),
             defineField({
-              name: "description",
-              title: "الوصف",
-              type: "text",
-              rows: 2,
-            }),
-            defineField({
-              name: "icon",
-              title: "الأيقونة",
-              type: "string",
-              description: "رمز تعبيري (مثل: 📋, 🚫, ⛸️)",
-              initialValue: "📄",
-            }),
-            defineField({
               name: "file",
               title: "الملف (PDF)",
               type: "file",
@@ -216,42 +203,10 @@ export default defineType({
               },
               validation: (Rule) => Rule.required(),
             }),
-            defineField({
-              name: "size",
-              title: "الحجم",
-              type: "string",
-              description: "مثال: 2.5 MB",
-            }),
-            defineField({
-              name: "pages",
-              title: "عدد الصفحات",
-              type: "string",
-              description: "مثال: 45 صفحة",
-            }),
-            defineField({
-              name: "language",
-              title: "اللغة",
-              type: "string",
-              options: {
-                list: [
-                  { title: "العربية", value: "العربية" },
-                  { title: "English", value: "English" },
-                  { title: "العربية / English", value: "العربية / English" },
-                ],
-              },
-              initialValue: "العربية",
-            }),
-            defineField({
-              name: "lastUpdated",
-              title: "تاريخ التحديث",
-              type: "date",
-              validation: (Rule) => Rule.required(),
-            }),
           ],
           preview: {
             select: {
               title: "title",
-              subtitle: "description",
             },
           },
         },
