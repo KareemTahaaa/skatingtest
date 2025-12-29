@@ -28,6 +28,19 @@ interface UpcomingAmendmentsProps {
 
 // Removed mock data
 
+const statusColors: { [key: string]: string } = {
+  "قيد المراجعة": "bg-blue-100 text-blue-800",
+  "في الصياغة": "bg-yellow-100 text-yellow-800",
+  مقترح: "bg-purple-100 text-purple-800",
+  "تحت الدراسة": "bg-gray-100 text-gray-800",
+}
+
+const priorityColors: { [key: string]: string } = {
+  عالية: "bg-red-100 text-red-800",
+  متوسطة: "bg-orange-100 text-orange-800",
+  منخفضة: "bg-green-100 text-green-800",
+}
+
 export default function UpcomingAmendments({ data }: UpcomingAmendmentsProps) {
   if (!data || !data.amendments || data.amendments.length === 0) {
     return null
