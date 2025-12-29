@@ -17,6 +17,13 @@ interface RegulationsContactProps {
 
 // Removed mock data
 
+const iconMap: { [key: string]: any } = {
+  Mail,
+  Phone,
+  FileQuestion,
+  Scale,
+}
+
 export default function RegulationsContact({ contacts }: RegulationsContactProps) {
   if (!contacts || contacts.length === 0) {
     return null

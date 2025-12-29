@@ -17,6 +17,13 @@ interface GeneralRegulationsProps {
 
 // Removed defaultRegulations (mock data) to hide section when empty
 
+const iconMap: { [key: string]: any } = {
+  Users,
+  Shield,
+  Award,
+  Scale,
+}
+
 export default function GeneralRegulations({ data }: GeneralRegulationsProps) {
   // If no data is provided or regulations list is empty, don't render anything
   if (!data || !data.regulations || data.regulations.length === 0) {
