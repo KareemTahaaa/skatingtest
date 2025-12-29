@@ -1,13 +1,7 @@
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import RegulationsHero from "@/components/regulations-hero"
-import RegulationsTableOfContents from "@/components/regulations-table-of-contents"
-import GeneralRegulations from "@/components/general-regulations"
-import DisciplineRegulations from "@/components/discipline-regulations"
-import AntiDopingRegulations from "@/components/anti-doping-regulations"
-import UpcomingAmendments from "@/components/upcoming-amendments"
 import RegulationsDownload from "@/components/regulations-download"
-import RegulationsContact from "@/components/regulations-contact"
 import { getRegulations, getRegulationsPageMeta } from "@/lib/sanity.queries"
 
 export async function generateMetadata() {
@@ -54,20 +48,10 @@ export default async function RegulationsPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Table of Contents - Sidebar */}
-          <div className="lg:col-span-1">
-            <RegulationsTableOfContents sections={regulations?.tableOfContents} />
-          </div>
-
+        <div className="grid grid-cols-1 gap-8">
           {/* Main Content */}
-          <div className="lg:col-span-3 space-y-12">
-            <GeneralRegulations data={regulations?.generalRegulations} />
-            <DisciplineRegulations data={regulations?.disciplineRegulations} />
-            <AntiDopingRegulations data={regulations?.antiDopingRegulations} />
-            <UpcomingAmendments data={regulations?.upcomingAmendments} />
+          <div className="space-y-12">
             <RegulationsDownload documents={regulations?.documents} />
-            <RegulationsContact contacts={regulations?.contacts} />
           </div>
         </div>
       </div>
