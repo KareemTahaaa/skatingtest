@@ -24,8 +24,10 @@ export default defineType({
     defineField({
       name: "icon",
       title: "الأيقونة",
-      type: "string",
-      description: "أدخل رمز تعبيري (emoji) أو رمز نصي",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
       name: "description",

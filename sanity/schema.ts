@@ -1,6 +1,6 @@
 import type { SchemaTypeDefinition } from "sanity"
 import blockContent from "./schema/blockContent"
-import category from "./schema/category"
+import blockContent from "./schema/blockContent"
 import author from "./schema/author"
 import news from "./schema/news"
 import event from "./schema/event"
@@ -22,7 +22,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     news,
     event,
     sportDiscipline,
-    category,
     author,
     blockContent,
     quote,

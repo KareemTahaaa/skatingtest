@@ -41,12 +41,7 @@ export default defineType({
         hotspot: true,
       },
     }),
-    defineField({
-      name: "categories",
-      title: "الفئات",
-      type: "array",
-      of: [{ type: "reference", to: { type: "category" } }],
-    }),
+
     defineField({
       name: "publishedAt",
       title: "تاريخ النشر",
