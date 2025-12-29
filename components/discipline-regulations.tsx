@@ -27,127 +27,17 @@ interface DisciplineRegulationsProps {
   }
 }
 
-const defaultDisciplines = [
-  {
-    id: "artistic",
-    title: "التزلج الفني",
-
-    color: "text-red-600",
-    bgColor: "bg-red-50",
-    borderColor: "border-red-200",
-    regulations: [
-      {
-        category: "قواعد الأداء",
-        items: [
-          "مدة الأداء: 2-4 دقائق حسب الفئة العمرية",
-          "الموسيقى: يجب أن تكون مناسبة وخالية من الكلمات البذيئة",
-          "الزي: يجب أن يكون محتشماً ومناسباً للرياضة",
-          "العناصر الإجبارية: حسب مستوى المتسابق",
-        ],
-      },
-      {
-        category: "نظام التحكيم",
-        items: [
-          "لجنة تحكيم مكونة من 5-9 حكام",
-          "تقييم العناصر الفنية والأداء الفني",
-          "خصم نقاط للأخطاء والسقطات",
-          "إعلان النتائج فور انتهاء المسابقة",
-        ],
-      },
-    ],
-  },
-  {
-    id: "speed",
-    title: "سباقات السرعة",
-
-    color: "text-red-600",
-    bgColor: "bg-red-50",
-    borderColor: "border-red-200",
-    regulations: [
-      {
-        category: "قواعد السباق",
-        items: [
-          "المسافات: 100م، 300م، 500م، 1000م، 1500م",
-          "البداية: بداية واقفة أو من الحركة",
-          "المسارات: تحديد المسارات بالقرعة",
-          "التجاوز: قواعد محددة للتجاوز الآمن",
-        ],
-      },
-      {
-        category: "المعدات المطلوبة",
-        items: ["أحذية تزلج سرعة معتمدة", "خوذة حماية إجبارية", "ملابس انسيابية مناسبة", "واقيات الركبة والكوع"],
-      },
-    ],
-  },
-  {
-    id: "hockey",
-    title: "هوكي التزلج",
-
-    color: "text-red-600",
-    bgColor: "bg-red-50",
-    borderColor: "border-red-200",
-    regulations: [
-      {
-        category: "قواعد اللعب",
-        items: [
-          "مدة المباراة: 3 أشواط × 15 دقيقة",
-          "عدد اللاعبين: 6 لاعبين لكل فريق",
-          "التبديلات: مسموحة أثناء اللعب",
-          "الحكام: حكم رئيسي وحكم مساعد",
-        ],
-      },
-      {
-        category: "المخالفات والعقوبات",
-        items: ["اللعب الخشن: إنذار أو طرد", "استخدام العصا بطريقة خطيرة", "عرقلة اللاعبين", "عدم احترام الحكام"],
-      },
-    ],
-  },
-  {
-    id: "freestyle",
-    title: "التزلج الحر",
-
-    color: "text-red-600",
-    bgColor: "bg-red-50",
-    borderColor: "border-red-200",
-    regulations: [
-      {
-        category: "فئات المسابقات",
-        items: ["الفريستايل الكلاسيكي", "الباتل (المعارك)", "السلالوم الحر", "القفز والحركات الهوائية"],
-      },
-      {
-        category: "معايير التقييم",
-        items: ["الإبداع والأصالة: 30%", "الصعوبة الفنية: 25%", "التنفيذ والدقة: 25%", "التفاعل مع الموسيقى: 20%"],
-      },
-    ],
-  },
-  {
-    id: "skateboard",
-    title: "التزلج على اللوح",
-
-    color: "text-red-600",
-    bgColor: "bg-red-50",
-    borderColor: "border-red-200",
-    regulations: [
-      {
-        category: "أنواع المسابقات",
-        items: [
-          "الشارع (Street): استخدام العوائق الحضرية",
-          "الحديقة (Park): في المنحدرات والأوعية",
-          "الفيرت (Vert): على المنحدرات العمودية",
-          "الفريستايل: حركات حرة ومبتكرة",
-        ],
-      },
-      {
-        category: "معدات الأمان",
-        items: ["خوذة حماية معتمدة", "واقيات الركبة والكوع", "واقيات المعصم", "أحذية مناسبة للتزلج"],
-      },
-    ],
-  },
-]
+// Removed defaultDisciplines (mock data)
 
 export default function DisciplineRegulations({ data }: DisciplineRegulationsProps) {
-  const [openDiscipline, setOpenDiscipline] = useState<string | null>("artistic")
-  const disciplines = data?.disciplines || defaultDisciplines
+  const [openDiscipline, setOpenDiscipline] = useState<string | null>(null)
+
+  // If no data provided or empty disciplines, hide section
+  if (!data || !data.disciplines || data.disciplines.length === 0) {
+    return null
+  }
+
+  const disciplines = data.disciplines
 
   const toggleDiscipline = (disciplineId: string) => {
     setOpenDiscipline(openDiscipline === disciplineId ? null : disciplineId)

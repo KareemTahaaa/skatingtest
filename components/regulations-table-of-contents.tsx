@@ -14,12 +14,7 @@ interface RegulationsTableOfContentsProps {
 }
 
 const defaultSections = [
-  { id: "general-regulations", title: "اللوائح العامة", icon: "FileText" },
-  { id: "discipline-regulations", title: "لوائح التخصصات", icon: "Users" },
-  { id: "anti-doping", title: "مكافحة المنشطات", icon: "Shield" },
-  { id: "upcoming-amendments", title: "التعديلات القادمة", icon: "Calendar" },
   { id: "downloads", title: "التحميلات", icon: "Download" },
-  { id: "contact", title: "الاتصال", icon: "Phone" },
 ]
 
 const iconMap: { [key: string]: any } = {

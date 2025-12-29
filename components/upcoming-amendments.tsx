@@ -26,56 +26,16 @@ interface UpcomingAmendmentsProps {
   }
 }
 
-const defaultAmendments = [
-  {
-    title: "تحديث معايير المعدات",
-    description: "مراجعة شاملة لمعايير السلامة الخاصة بمعدات التزلج لجميع التخصصات",
-    expectedDate: "2024-03-15",
-    status: "قيد المراجعة",
-    priority: "عالية",
-    icon: "🛡️",
-  },
-  {
-    title: "لوائح البطولات الدولية",
-    description: "تحديث القوانين لتتماشى مع معايير الاتحاد الدولي للتزلج 2024",
-    expectedDate: "2024-04-01",
-    status: "في الصياغة",
-    priority: "عالية",
-    icon: "🌍",
-  },
-  {
-    title: "نظام التأهيل للبطولات",
-    description: "معايير جديدة لتأهيل الرياضيين للبطولات الإقليمية والدولية",
-    expectedDate: "2024-05-20",
-    status: "مقترح",
-    priority: "متوسطة",
-    icon: "🏆",
-  },
-]
-
-const defaultTimeline = [
-  { label: "Q1 2024", title: "معايير المعدات" },
-  { label: "Q2 2024", title: "لوائح البطولات" },
-  { label: "Q3 2024", title: "نظام التأهيل" },
-  { label: "Q4 2024", title: "مراجعة شاملة" },
-]
-
-const statusColors: { [key: string]: string } = {
-  "قيد المراجعة": "bg-blue-100 text-blue-800",
-  "في الصياغة": "bg-yellow-100 text-yellow-800",
-  مقترح: "bg-purple-100 text-purple-800",
-  "تحت الدراسة": "bg-gray-100 text-gray-800",
-}
-
-const priorityColors: { [key: string]: string } = {
-  عالية: "bg-red-100 text-red-800",
-  متوسطة: "bg-orange-100 text-orange-800",
-  منخفضة: "bg-green-100 text-green-800",
-}
+// Removed mock data
 
 export default function UpcomingAmendments({ data }: UpcomingAmendmentsProps) {
-  const amendments = data?.amendments || defaultAmendments
-  const timeline = data?.timelineSummary?.quarters || defaultTimeline
+  if (!data || !data.amendments || data.amendments.length === 0) {
+    return null
+  }
+
+  const amendments = data.amendments
+  // Use timeline if available, otherwise just use empty list (or hide logic for timeline if critical, but user seems focused on removing default junk)
+  const timeline = data.timelineSummary?.quarters || []
   const notificationText =
     data?.notificationText ||
     "سيتم إخطار جميع الأعضاء والأندية المسجلة عند اعتماد أي تعديلات جديدة عبر البريد الإلكتروني والموقع الرسمي."

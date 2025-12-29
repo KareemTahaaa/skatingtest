@@ -15,45 +15,13 @@ interface RegulationsContactProps {
   contacts?: Contact[]
 }
 
-const defaultContacts = [
-  {
-    icon: "FileQuestion",
-    title: "الاستفسارات العامة",
-    description: "لأي استفسارات عن اللوائح والقوانين",
-    email: "regulations@ensf.com",
-    phone: "+20 100 123 4567",
-    color: "text-blue-600",
-    bgColor: "bg-blue-50",
-  },
-  {
-    icon: "Shield",
-    title: "مكافحة المنشطات",
-    description: "للإبلاغ عن المخالفات أو الاستفسارات",
-    email: "antidoping@ensf.com",
-    phone: "+20 100 123 4568",
-    color: "text-green-600",
-    bgColor: "bg-green-50",
-  },
-  {
-    icon: "Scale",
-    title: "اللجنة القانونية",
-    description: "للاستئنافات والقضايا القانونية",
-    email: "legal@ensf.com",
-    phone: "+20 100 123 4569",
-    color: "text-purple-600",
-    bgColor: "bg-purple-50",
-  },
-]
-
-const iconMap: { [key: string]: any } = {
-  Mail,
-  Phone,
-  FileQuestion,
-  Scale,
-}
+// Removed mock data
 
 export default function RegulationsContact({ contacts }: RegulationsContactProps) {
-  const contactList = contacts || defaultContacts
+  if (!contacts || contacts.length === 0) {
+    return null
+  }
+  const contactList = contacts
 
   return (
     <section id="contact" className="scroll-mt-24">

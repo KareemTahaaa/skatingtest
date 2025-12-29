@@ -23,70 +23,20 @@ interface AntiDopingRegulationsProps {
   }
 }
 
-const defaultSections: AntiDopingSection[] = [
-  {
-    icon: "Shield",
-    title: "الامتثال لوادا (WADA)",
-    content: [
-      "الالتزام الكامل بقواعد الوكالة العالمية لمكافحة المنشطات",
-      "تطبيق القائمة المحظورة المحدثة سنوياً",
-      "إجراء فحوصات دورية ومفاجئة للرياضيين",
-      "التعاون مع السلطات الدولية في التحقيقات",
-    ],
-    color: "text-green-600",
-    bgColor: "bg-green-50",
-  },
-  {
-    icon: "AlertTriangle",
-    title: "المواد المحظورة",
-    content: [
-      "المنشطات الابتنائية والهرمونات",
-      "المنبهات ومثبطات الشهية",
-      "المواد المخدرة والمسكنات القوية",
-      "مدرات البول ومواد التخفي",
-      "طرق التلاعب المحظورة",
-    ],
-    color: "text-red-600",
-    bgColor: "bg-red-50",
-  },
-  {
-    icon: "FileCheck",
-    title: "الاستثناءات العلاجية (TUE)",
-    content: [
-      "تقديم طلب قبل 30 يوماً من المسابقة",
-      "تقرير طبي مفصل من طبيب مختص",
-      "موافقة اللجنة الطبية للاتحاد",
-      "مراجعة دورية للحالة الصحية",
-      "إشعار الاتحاد الدولي بالاستثناء",
-    ],
-    color: "text-blue-600",
-    bgColor: "bg-blue-50",
-  },
-  {
-    icon: "Scale",
-    title: "العقوبات والجزاءات",
-    content: [
-      "المخالفة الأولى: إيقاف من سنتين إلى 4 سنوات",
-      "المخالفة المتكررة: إيقاف مدى الحياة",
-      "إلغاء النتائج والميداليات",
-      "غرامات مالية حسب خطورة المخالفة",
-      "منع المشاركة في البطولات الدولية",
-    ],
-    color: "text-purple-600",
-    bgColor: "bg-purple-50",
-  },
-]
-
-const defaultImportantNotice: ImportantNotice = {
-  title: "تحذير مهم للرياضيين",
-  content: "الرياضي مسؤول بشكل كامل عن أي مادة توجد في جسمه، بغض النظر عن كيفية دخولها. يُنصح بشدة بالتشاور مع الطبيب المختص قبل تناول أي دواء أو مكمل غذائي.",
-  contactPhone: "+20 100 123 4580",
-  contactEmail: "antidoping@ensf.com"
-}
+// Removed mock data
 
 export default function AntiDopingRegulations({ data }: AntiDopingRegulationsProps) {
-  const sections = data?.sections || defaultSections
-  const notice = data?.importantNotice || defaultImportantNotice
+  if (!data || !data.sections || data.sections.length === 0) {
+    return null
+  }
+
+  const sections = data.sections
+  const notice = data.importantNotice || {
+    title: "تحذير مهم",
+    content: "يرجى مراجعة اللوائح",
+    contactPhone: "",
+    contactEmail: ""
+  }
 
   const getIconComponent = (iconName: string) => {
     switch (iconName) {

@@ -15,62 +15,15 @@ interface GeneralRegulationsProps {
   }
 }
 
-const defaultRegulations = [
-  {
-    icon: "Users",
-    title: "شروط الأهلية",
-    items: [
-      "يجب أن يكون المتسابق مسجلاً في الاتحاد المصري للتزلج",
-      "تقديم شهادة طبية تثبت اللياقة البدنية",
-      "دفع رسوم العضوية السنوية",
-      "الالتزام بقواعد السلوك الرياضي",
-      "عدم وجود إيقاف ��و عقوبة سارية",
-    ],
-  },
-  {
-    icon: "Shield",
-    title: "قواعد السلوك",
-    items: [
-      "احترام الحكام والمنافسين والجمهور",
-      "عدم استخدام ألفاظ غير لائقة أو سلوك عدواني",
-      "الالتزام بالزي الرسمي المعتمد",
-      "عدم التدخين أو تناول المواد المحظورة",
-      "الحفاظ على نظافة وسلامة المرافق",
-    ],
-  },
-  {
-    icon: "Award",
-    title: "معايير المعدات",
-    items: [
-      "استخدام معدات معتمدة من الاتحاد الدولي",
-      "فحص المعدات قبل كل مسابقة",
-      "ارتداء معدات الحماية الإلزامية",
-      "عدم تعديل المعدات بطريقة غير قانونية",
-      "الحصول على شهادة سلامة للمعدات",
-    ],
-  },
-  {
-    icon: "Scale",
-    title: "إجراءات الاستئناف",
-    items: [
-      "تقديم الاستئناف خلال 48 ساعة من القرار",
-      "دفع رسوم الاستئناف المقررة",
-      "تقديم الأدلة والوثائق المطلوبة",
-      "حضور جلسة الاستماع إذا طُلب ذلك",
-      "قبول قرار لجنة الاستئناف النهائي",
-    ],
-  },
-]
-
-const iconMap: { [key: string]: any } = {
-  Users,
-  Shield,
-  Award,
-  Scale,
-}
+// Removed defaultRegulations (mock data) to hide section when empty
 
 export default function GeneralRegulations({ data }: GeneralRegulationsProps) {
-  const regulations = data?.regulations || defaultRegulations
+  // If no data is provided or regulations list is empty, don't render anything
+  if (!data || !data.regulations || data.regulations.length === 0) {
+    return null
+  }
+
+  const regulations = data.regulations
 
   return (
     <section id="general-regulations" className="scroll-mt-24">
@@ -97,7 +50,7 @@ export default function GeneralRegulations({ data }: GeneralRegulationsProps) {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
-                  {regulation.items.map((item, itemIndex) => (
+                  {regulation.items && regulation.items.map((item, itemIndex) => (
                     <li key={itemIndex} className="flex items-start">
                       <div className="bg-red-100 rounded-full w-2 h-2 mt-2 mr-3 flex-shrink-0"></div>
                       <span className="text-gray-700 leading-relaxed">{item}</span>
