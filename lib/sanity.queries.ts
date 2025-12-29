@@ -591,3 +591,29 @@ export async function getResults() {
   }
 }
 
+// Get results for a specific event
+export async function getResultsByEvent(eventId: string) {
+  try {
+    const results = await client.fetch(
+      `*[_type == "result" && event._ref == $eventId] | order(publishedAt desc) {
+        _id,
+        title,
+        description,
+        category,
+        file {
+          asset-> {
+            url,
+            originalFilename,
+            size
+          }
+        },
+        publishedAt
+      }`,
+      { eventId }
+    )
+    return results || []
+  } catch (error) {
+    console.error("Error fetching results by event:", error)
+    return []
+  }
+}

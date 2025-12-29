@@ -31,6 +31,13 @@ export default defineType({
             },
         }),
         defineField({
+            name: 'event',
+            title: 'الفعالية',
+            type: 'reference',
+            to: [{ type: 'event' }],
+            validation: (Rule) => Rule.required(),
+        }),
+        defineField({
             name: 'file',
             title: 'ملف PDF',
             type: 'file',

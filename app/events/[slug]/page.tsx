@@ -2,9 +2,9 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import Image from "next/image"
 import Link from "next/link"
-import { MapPin } from "lucide-react"
+import { MapPin, Eye, Download, FileText } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { getEventBySlug } from "@/lib/sanity.queries"
+import { getEventBySlug, getResultsByEvent } from "@/lib/sanity.queries"
 import { urlForImage } from "@/lib/sanity.client"
 import { formatDate } from "@/lib/utils"
 import { PortableText } from "@portabletext/react"
@@ -23,6 +23,9 @@ export default async function EventDetailPage({ params }: { params: { slug: stri
 
   // Calculate if the event is upcoming
   const isUpcoming = event.startDate && new Date(event.startDate) > new Date()
+
+  // Fetch results for this event
+  const results = await getResultsByEvent(event._id)
 
   return (
     <main className="min-h-screen bg-gray-100">
@@ -157,11 +160,6 @@ export default async function EventDetailPage({ params }: { params: { slug: stri
                     التسجيل مغلق
                   </Button>
                 )}
-                <Link href="/results" className="block w-full">
-                  <Button variant="outline" className="w-full">
-                    عرض النتائج
-                  </Button>
-                </Link>
               </div>
             </div>
           </div>
@@ -303,6 +301,53 @@ export default async function EventDetailPage({ params }: { params: { slug: stri
             </div>
           </div>
         </div>
+
+        {/* Results Section */}
+        {results && results.length > 0 && (
+          <div className="container mx-auto px-4 pb-8">
+            <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+              <div className="p-6">
+                <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                  <FileText className="h-6 w-6 ml-2 text-red-600" />
+                  نتائج الفعالية
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {results.map((result: any) => (
+                    <div key={result._id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                      <h3 className="font-bold text-lg mb-2">{result.title}</h3>
+                      {result.description && (
+                        <p className="text-gray-600 text-sm mb-3">{result.description}</p>
+                      )}
+                      <div className="flex gap-2">
+                        <a
+                          href={result.file?.asset?.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1"
+                        >
+                          <Button variant="outline" size="sm" className="w-full">
+                            <Eye className="h-4 w-4 ml-1" />
+                            عرض
+                          </Button>
+                        </a>
+                        <a
+                          href={`${result.file?.asset?.url}?dl=`}
+                          download
+                          className="flex-1"
+                        >
+                          <Button size="sm" className="w-full bg-red-600 hover:bg-red-700">
+                            <Download className="h-4 w-4 ml-1" />
+                            تحميل
+                          </Button>
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       <Footer />

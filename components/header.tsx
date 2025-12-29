@@ -62,26 +62,10 @@ export default function Header() {
             <Link href="/events" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
               الفعاليات
             </Link>
-            <Link href="/results" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
-              النتائج
-            </Link>
             {!loading && disciplines.length > 0 && (
-              <div className="relative group">
-                <button className="text-gray-700 hover:text-red-600 font-medium transition-colors">الرياضات ▾</button>
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                  <div className="py-1">
-                    {disciplines.map((discipline) => (
-                      <Link
-                        key={discipline._id}
-                        href={`/disciplines/${discipline.slug.current}`}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600"
-                      >
-                        {discipline.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <Link href="/disciplines" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
+                الرياضات
+              </Link>
             )}
             <Link href="/regulations" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
               اللوائح
@@ -129,36 +113,14 @@ export default function Header() {
               >
                 الفعاليات
               </Link>
-              <Link
-                href="/results"
-                className="text-gray-700 hover:text-red-600 font-medium py-2 transition-colors"
-                onClick={toggleMenu}
-              >
-                النتائج
-              </Link>
               {!loading && disciplines.length > 0 && (
-                <div>
-                  <button
-                    onClick={toggleDisciplines}
-                    className="text-gray-700 hover:text-red-600 font-medium py-2 transition-colors w-full text-right"
-                  >
-                    الرياضات {isDisciplinesOpen ? "▴" : "▾"}
-                  </button>
-                  {isDisciplinesOpen && (
-                    <div className="pr-4 space-y-2 mt-2">
-                      {disciplines.map((discipline) => (
-                        <Link
-                          key={discipline._id}
-                          href={`/disciplines/${discipline.slug.current}`}
-                          className="block text-gray-600 hover:text-red-600 py-1 transition-colors"
-                          onClick={toggleMenu}
-                        >
-                          {discipline.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                <Link
+                  href="/disciplines"
+                  className="text-gray-700 hover:text-red-600 font-medium py-2 transition-colors"
+                  onClick={toggleMenu}
+                >
+                  الرياضات
+                </Link>
               )}
               <Link
                 href="/regulations"
