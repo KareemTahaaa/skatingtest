@@ -18,7 +18,7 @@ export default async function DisciplinePage({ params }: { params: { slug: strin
   const [news, events] = await Promise.all([getNewsByDiscipline(discipline._id), getEventsByDiscipline(discipline._id)])
 
   const imageUrl = discipline.image ? urlForImage(discipline.image).url() : "/placeholder.svg?height=400&width=1200"
-  const iconDisplay = discipline.icon && typeof discipline.icon === "string" ? discipline.icon : "🏆"
+
 
   return (
     <main className="min-h-screen bg-gray-100">
@@ -35,7 +35,16 @@ export default async function DisciplinePage({ params }: { params: { slug: strin
         />
         <div className="absolute inset-0 bg-black/50" />
         <div className="absolute inset-0 container mx-auto px-4 flex flex-col justify-center items-center text-white text-center">
-          <div className="text-6xl mb-4">{iconDisplay}</div>
+          {discipline.icon && (
+            <div className="mb-4 relative w-24 h-24">
+              <Image
+                src={urlForImage(discipline.icon).url()}
+                alt={discipline.name}
+                fill
+                className="object-contain"
+              />
+            </div>
+          )}
           <h1 className="text-5xl font-bold mb-4">{discipline.name}</h1>
           {discipline.description && typeof discipline.description === "string" && (
             <p className="text-xl max-w-2xl">{discipline.description}</p>

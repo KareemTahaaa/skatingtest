@@ -62,11 +62,9 @@ export default function Header() {
             <Link href="/events" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
               الفعاليات
             </Link>
-            {!loading && disciplines.length > 0 && (
-              <Link href="/disciplines" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
-                الرياضات
-              </Link>
-            )}
+            <Link href="/disciplines" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
+              الرياضات
+            </Link>
             <Link href="/regulations" className="text-gray-700 hover:text-red-600 font-medium transition-colors">
               اللوائح
             </Link>
@@ -113,15 +111,13 @@ export default function Header() {
               >
                 الفعاليات
               </Link>
-              {!loading && disciplines.length > 0 && (
-                <Link
-                  href="/disciplines"
-                  className="text-gray-700 hover:text-red-600 font-medium py-2 transition-colors"
-                  onClick={toggleMenu}
-                >
-                  الرياضات
-                </Link>
-              )}
+              <Link
+                href="/disciplines"
+                className="text-gray-700 hover:text-red-600 font-medium py-2 transition-colors"
+                onClick={toggleMenu}
+              >
+                الرياضات
+              </Link>
               <Link
                 href="/regulations"
                 className="text-gray-700 hover:text-red-600 font-medium py-2 transition-colors"
