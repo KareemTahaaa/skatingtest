@@ -70,7 +70,7 @@ export default function EventsContent({ initialEvents, sportDisciplines }: Event
     // Filter by discipline
     if (currentDiscipline !== "all") {
       newFilteredEvents = newFilteredEvents.filter((event) =>
-        event.sportDisciplines?.some((d: any) => d.slug?.current === currentDiscipline),
+        event.discipline?.slug?.current === currentDiscipline
       )
     }
 

@@ -54,7 +54,7 @@ export default function EventsFilters({ sportDisciplines, initialEvents, onFilte
     // Filter by discipline
     if (currentDiscipline !== "all") {
       filteredEvents = filteredEvents.filter((event) =>
-        event.sportDisciplines?.some((d: any) => d.slug?.current === currentDiscipline),
+        event.discipline?.slug?.current === currentDiscipline
       )
     }
 
@@ -88,12 +88,12 @@ export default function EventsFilters({ sportDisciplines, initialEvents, onFilte
     ),
   )
 
-  // Get the current discipline title
+  // Get the current discipline name
   let currentDisciplineTitle = "الكل"
   if (currentDiscipline !== "all") {
     const foundDiscipline = disciplines.find((d) => d.slug?.current === currentDiscipline)
-    if (foundDiscipline && foundDiscipline.title) {
-      currentDisciplineTitle = foundDiscipline.title
+    if (foundDiscipline && foundDiscipline.name) {
+      currentDisciplineTitle = foundDiscipline.name
     }
   }
 
@@ -118,9 +118,8 @@ export default function EventsFilters({ sportDisciplines, initialEvents, onFilte
             <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
               <div className="py-1">
                 <button
-                  className={`block w-full text-right px-4 py-2 text-sm ${
-                    currentLocation === "all" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
-                  }`}
+                  className={`block w-full text-right px-4 py-2 text-sm ${currentLocation === "all" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
+                    }`}
                   onClick={() => {
                     updateFilters("location", "all")
                     setLocationOpen(false)
@@ -131,9 +130,8 @@ export default function EventsFilters({ sportDisciplines, initialEvents, onFilte
                 {locations.map((location, index) => (
                   <button
                     key={index}
-                    className={`block w-full text-right px-4 py-2 text-sm ${
-                      currentLocation === location ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
-                    }`}
+                    className={`block w-full text-right px-4 py-2 text-sm ${currentLocation === location ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
+                      }`}
                     onClick={() => {
                       updateFilters("location", location)
                       setLocationOpen(false)
@@ -164,9 +162,8 @@ export default function EventsFilters({ sportDisciplines, initialEvents, onFilte
             <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
               <div className="py-1">
                 <button
-                  className={`block w-full text-right px-4 py-2 text-sm ${
-                    currentDiscipline === "all" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
-                  }`}
+                  className={`block w-full text-right px-4 py-2 text-sm ${currentDiscipline === "all" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
+                    }`}
                   onClick={() => {
                     updateFilters("discipline", "all")
                     setDisciplineOpen(false)
@@ -177,17 +174,16 @@ export default function EventsFilters({ sportDisciplines, initialEvents, onFilte
                 {disciplines.map((discipline) => (
                   <button
                     key={discipline._id}
-                    className={`block w-full text-right px-4 py-2 text-sm ${
-                      currentDiscipline === discipline.slug?.current
+                    className={`block w-full text-right px-4 py-2 text-sm ${currentDiscipline === discipline.slug?.current
                         ? "bg-red-50 text-red-600"
                         : "text-gray-700 hover:bg-gray-100"
-                    }`}
+                      }`}
                     onClick={() => {
                       updateFilters("discipline", discipline.slug?.current)
                       setDisciplineOpen(false)
                     }}
                   >
-                    {discipline.title}
+                    {discipline.name}
                   </button>
                 ))}
               </div>
@@ -214,9 +210,8 @@ export default function EventsFilters({ sportDisciplines, initialEvents, onFilte
             <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
               <div className="py-1">
                 <button
-                  className={`block w-full text-right px-4 py-2 text-sm ${
-                    currentSort === "date" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
-                  }`}
+                  className={`block w-full text-right px-4 py-2 text-sm ${currentSort === "date" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
+                    }`}
                   onClick={() => {
                     updateFilters("sort", "date")
                     setSortOpen(false)
@@ -225,9 +220,8 @@ export default function EventsFilters({ sportDisciplines, initialEvents, onFilte
                   التاريخ
                 </button>
                 <button
-                  className={`block w-full text-right px-4 py-2 text-sm ${
-                    currentSort === "title" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
-                  }`}
+                  className={`block w-full text-right px-4 py-2 text-sm ${currentSort === "title" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
+                    }`}
                   onClick={() => {
                     updateFilters("sort", "title")
                     setSortOpen(false)
@@ -236,9 +230,8 @@ export default function EventsFilters({ sportDisciplines, initialEvents, onFilte
                   العنوان
                 </button>
                 <button
-                  className={`block w-full text-right px-4 py-2 text-sm ${
-                    currentSort === "popular" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
-                  }`}
+                  className={`block w-full text-right px-4 py-2 text-sm ${currentSort === "popular" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
+                    }`}
                   onClick={() => {
                     updateFilters("sort", "popular")
                     setSortOpen(false)
@@ -282,9 +275,8 @@ export default function EventsFilters({ sportDisciplines, initialEvents, onFilte
               <h3 className="font-medium mb-2">المكان</h3>
               <div className="space-y-2">
                 <button
-                  className={`block w-full text-right px-3 py-2 text-sm rounded-md ${
-                    currentLocation === "all" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
-                  }`}
+                  className={`block w-full text-right px-3 py-2 text-sm rounded-md ${currentLocation === "all" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
+                    }`}
                   onClick={() => updateFilters("location", "all")}
                 >
                   الكل
@@ -292,9 +284,8 @@ export default function EventsFilters({ sportDisciplines, initialEvents, onFilte
                 {locations.map((location, index) => (
                   <button
                     key={index}
-                    className={`block w-full text-right px-3 py-2 text-sm rounded-md ${
-                      currentLocation === location ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
-                    }`}
+                    className={`block w-full text-right px-3 py-2 text-sm rounded-md ${currentLocation === location ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
+                      }`}
                     onClick={() => updateFilters("location", location)}
                   >
                     {location}
@@ -307,9 +298,8 @@ export default function EventsFilters({ sportDisciplines, initialEvents, onFilte
               <h3 className="font-medium mb-2">التخصص</h3>
               <div className="space-y-2">
                 <button
-                  className={`block w-full text-right px-3 py-2 text-sm rounded-md ${
-                    currentDiscipline === "all" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
-                  }`}
+                  className={`block w-full text-right px-3 py-2 text-sm rounded-md ${currentDiscipline === "all" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
+                    }`}
                   onClick={() => updateFilters("discipline", "all")}
                 >
                   الكل
@@ -317,14 +307,13 @@ export default function EventsFilters({ sportDisciplines, initialEvents, onFilte
                 {disciplines.map((discipline) => (
                   <button
                     key={discipline._id}
-                    className={`block w-full text-right px-3 py-2 text-sm rounded-md ${
-                      currentDiscipline === discipline.slug?.current
+                    className={`block w-full text-right px-3 py-2 text-sm rounded-md ${currentDiscipline === discipline.slug?.current
                         ? "bg-red-50 text-red-600"
                         : "text-gray-700 hover:bg-gray-100"
-                    }`}
+                      }`}
                     onClick={() => updateFilters("discipline", discipline.slug?.current)}
                   >
-                    {discipline.title}
+                    {discipline.name}
                   </button>
                 ))}
               </div>
@@ -334,25 +323,22 @@ export default function EventsFilters({ sportDisciplines, initialEvents, onFilte
               <h3 className="font-medium mb-2">الترتيب</h3>
               <div className="space-y-2">
                 <button
-                  className={`block w-full text-right px-3 py-2 text-sm rounded-md ${
-                    currentSort === "date" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
-                  }`}
+                  className={`block w-full text-right px-3 py-2 text-sm rounded-md ${currentSort === "date" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
+                    }`}
                   onClick={() => updateFilters("sort", "date")}
                 >
                   التاريخ
                 </button>
                 <button
-                  className={`block w-full text-right px-3 py-2 text-sm rounded-md ${
-                    currentSort === "title" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
-                  }`}
+                  className={`block w-full text-right px-3 py-2 text-sm rounded-md ${currentSort === "title" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
+                    }`}
                   onClick={() => updateFilters("sort", "title")}
                 >
                   العنوان
                 </button>
                 <button
-                  className={`block w-full text-right px-3 py-2 text-sm rounded-md ${
-                    currentSort === "popular" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
-                  }`}
+                  className={`block w-full text-right px-3 py-2 text-sm rounded-md ${currentSort === "popular" ? "bg-red-50 text-red-600" : "text-gray-700 hover:bg-gray-100"
+                    }`}
                   onClick={() => updateFilters("sort", "popular")}
                 >
                   الأكثر مشاهدة

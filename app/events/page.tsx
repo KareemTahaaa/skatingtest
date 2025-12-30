@@ -41,7 +41,7 @@ export default async function EventsPage({ searchParams }: { searchParams?: { di
 
   if (disciplineFilter && disciplineFilter !== "all") {
     filteredEvents = events.filter((item) =>
-      item.sportDisciplines?.some((d: any) => d.slug?.current === disciplineFilter),
+      item.discipline?.slug?.current === disciplineFilter
     )
   }
 
@@ -49,7 +49,7 @@ export default async function EventsPage({ searchParams }: { searchParams?: { di
   if (disciplineFilter && disciplineFilter !== "all") {
     const discipline = sportDisciplines.find((d) => d.slug?.current === disciplineFilter)
     if (discipline) {
-      currentDisciplineName = `فعاليات ${discipline.title}`
+      currentDisciplineName = `فعاليات ${discipline.name}`
     }
   }
 
