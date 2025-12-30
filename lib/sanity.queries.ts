@@ -540,21 +540,7 @@ export async function getRegulations() {
         disciplineRegulations,
         antiDopingRegulations,
         upcomingAmendments,
-        documents[] {
-          title,
-          description,
-          icon,
-          size,
-          pages,
-          language,
-          lastUpdated,
-          file {
-            asset-> {
-              url,
-              size
-            }
-          }
-        },
+        documents,
         contacts
       }`,
     )

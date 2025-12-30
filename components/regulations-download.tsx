@@ -4,16 +4,15 @@ import { Download, FileText, Calendar } from "lucide-react"
 
 interface Document {
   title: string
-  description?: string
-  size?: string
-  pages?: string
-  lastUpdated?: string
-  language?: string
-  icon?: string
+  description: string
+  size: string
+  pages: string
+  lastUpdated: string
+  language: string
+  icon: string
   file?: {
     asset: {
       url: string
-      size?: number
     }
   }
 }
@@ -53,19 +52,7 @@ const defaultDocuments = [
 ]
 
 export default function RegulationsDownload({ documents }: RegulationsDownloadProps) {
-  // Use empty array if no documents provided (no mock data fallback)
-  const docs = documents || []
-
-  // If no documents, hide the section entirely
-  if (docs.length === 0) {
-    return null
-  }
-
-  // Format bytes to MB
-  const formatSize = (sizeBytes: number) => {
-    if (!sizeBytes) return ""
-    return `${(sizeBytes / (1024 * 1024)).toFixed(2)} MB`
-  }
+  const docs = documents || defaultDocuments
 
   return (
     <section id="downloads" className="scroll-mt-24">
@@ -79,49 +66,31 @@ export default function RegulationsDownload({ documents }: RegulationsDownloadPr
           <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
             <CardHeader>
               <CardTitle className="flex items-start text-lg">
-                <span className="text-3xl ml-3">{doc.icon || "📄"}</span>
+                <span className="text-3xl ml-3">{doc.icon}</span>
                 <span>{doc.title}</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
-              {doc.description && <p className="text-gray-600 mb-4 text-sm">{doc.description}</p>}
-
+              <p className="text-gray-600 mb-4 text-sm">{doc.description}</p>
               <div className="space-y-2 mb-4 text-sm text-gray-500">
-                {/* Dynamically fetched size from asset, fallback to manual size if available */}
-                {(doc.file?.asset?.size || doc.size) && (
-                  <div className="flex items-center justify-between">
-                    <span>الحجم:</span>
-                    <span className="font-medium">
-                      {doc.file?.asset?.size
-                        ? formatSize(doc.file.asset.size)
-                        : doc.size}
-                    </span>
-                  </div>
-                )}
-
-                {doc.pages && (
-                  <div className="flex items-center justify-between">
-                    <span>الصفحات:</span>
-                    <span className="font-medium">{doc.pages}</span>
-                  </div>
-                )}
-
-                {doc.language && (
-                  <div className="flex items-center justify-between">
-                    <span>اللغة:</span>
-                    <span className="font-medium">{doc.language}</span>
-                  </div>
-                )}
-
-                {doc.lastUpdated && (
-                  <div className="flex items-center justify-between">
-                    <Calendar className="h-4 w-4 ml-1 inline" />
-                    <span>آخر تحديث:</span>
-                    <span className="font-medium">{new Date(doc.lastUpdated).toLocaleDateString("ar-EG")}</span>
-                  </div>
-                )}
+                <div className="flex items-center justify-between">
+                  <span>الحجم:</span>
+                  <span className="font-medium">{doc.size}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span>الصفحات:</span>
+                  <span className="font-medium">{doc.pages}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span>اللغة:</span>
+                  <span className="font-medium">{doc.language}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <Calendar className="h-4 w-4 ml-1 inline" />
+                  <span>آخر تحديث:</span>
+                  <span className="font-medium">{new Date(doc.lastUpdated).toLocaleDateString("ar-EG")}</span>
+                </div>
               </div>
-
               <Button className="w-full bg-red-600 hover:bg-red-700" asChild>
                 <a href={doc.file?.asset?.url || "#"} download>
                   <Download className="h-4 w-4 ml-2" />
@@ -140,7 +109,8 @@ export default function RegulationsDownload({ documents }: RegulationsDownloadPr
             <div>
               <h3 className="font-bold text-blue-800 mb-2">ملاحظة هامة</h3>
               <p className="text-blue-700 leading-relaxed">
-                جميع المستندات المتوفرة للتحميل هي النسخ الرسمية المعتمدة من الاتحاد المصري للتزلج.
+                جميع المستندات المتوفرة للتحميل هي النسخ الرسمية المعتمدة من الاتحاد المصري للتزلج. في حالة وجود أي
+                تعارض بين النسخة الإلكترونية والنسخة المطبوعة، تُعتبر النسخة المطبوعة المودعة لدى الاتحاد هي المرجع.
               </p>
             </div>
           </div>
