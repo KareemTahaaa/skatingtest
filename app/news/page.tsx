@@ -82,7 +82,6 @@ export default async function NewsPage({ searchParams }: { searchParams?: { disc
         </div>
 
         <Suspense fallback={<div>جاري التحميل...</div>}>
-          <NewsFilters sportDisciplines={sportDisciplines} />
           <NewsGrid news={filteredNews} />
         </Suspense>
       </div>
