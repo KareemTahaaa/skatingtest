@@ -533,7 +533,7 @@ export async function getEventsPageMeta() {
 export async function getRegulations() {
   try {
     const regulations = await client.fetch(
-      `*[_type == "regulations"][0] {
+      `*[_type == "regulations"] | order(_updatedAt desc)[0] {
         hero,
         tableOfContents,
         generalRegulations,
