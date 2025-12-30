@@ -3,7 +3,6 @@ import Header from "@/components/header"
 import Footer from "@/components/footer"
 import NewsHero from "@/components/news-hero"
 import NewsGrid from "@/components/news-grid"
-import NewsFilters from "@/components/news-filters"
 import { getAllNews, getAllSportDisciplines, getNewsPageMeta, getSiteSettings } from "@/lib/sanity.queries"
 import { Suspense } from "react"
 

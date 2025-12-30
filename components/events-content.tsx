@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import EventsGrid from "@/components/events-grid"
 import EventsList from "@/components/events-list"
-import EventsFilters from "@/components/events-filters"
 import { useSearchParams } from "next/navigation"
 
 interface EventsContentProps {
@@ -177,8 +176,6 @@ export default function EventsContent({ initialEvents, sportDisciplines }: Event
           </button>
         </div>
       </div>
-
-      <EventsFilters sportDisciplines={disciplines} initialEvents={eventsData} onFilterChange={handleFilterChange} />
 
       {/* Events content based on view mode */}
       {viewMode === "grid" ? <EventsGrid events={displayedEvents} /> : <EventsList events={displayedEvents} />}
