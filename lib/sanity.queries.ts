@@ -535,6 +535,11 @@ export async function getRegulations() {
     const regulations = await client.fetch(
       `*[_type == "regulations"][0] {
         hero,
+        tableOfContents,
+        generalRegulations,
+        disciplineRegulations,
+        antiDopingRegulations,
+        upcomingAmendments,
         documents[] {
           title,
           file {
@@ -543,7 +548,8 @@ export async function getRegulations() {
               size
             }
           }
-        }
+        },
+        contacts
       }`,
     )
     return regulations || mockRegulations
