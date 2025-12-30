@@ -535,13 +535,15 @@ export async function getRegulations() {
     const regulations = await client.fetch(
       `*[_type == "regulations"][0] {
         hero,
-        tableOfContents,
-        generalRegulations,
-        disciplineRegulations,
-        antiDopingRegulations,
-        upcomingAmendments,
-        documents,
-        contacts
+        documents[] {
+          title,
+          file {
+            asset-> {
+              url,
+              size
+            }
+          }
+        }
       }`,
     )
     return regulations || mockRegulations

@@ -4,15 +4,10 @@ import { Download, FileText, Calendar } from "lucide-react"
 
 interface Document {
   title: string
-  description: string
-  size: string
-  pages: string
-  lastUpdated: string
-  language: string
-  icon: string
   file?: {
     asset: {
       url: string
+      size: number
     }
   }
 }
@@ -21,35 +16,7 @@ interface RegulationsDownloadProps {
   documents?: Document[]
 }
 
-const defaultDocuments = [
-  {
-    title: "اللوائح العامة الكاملة",
-    description: "نسخة PDF من جميع اللوائح العامة للاتحاد",
-    size: "2.5 MB",
-    pages: "45 صفحة",
-    lastUpdated: "2024-01-15",
-    language: "العربية",
-    icon: "📋",
-  },
-  {
-    title: "لوائح مكافحة المنشطات",
-    description: "القوانين الخاصة بالمواد المحظورة والفحوصات",
-    size: "1.8 MB",
-    pages: "32 صفحة",
-    lastUpdated: "2024-01-10",
-    language: "العربية / English",
-    icon: "🚫",
-  },
-  {
-    title: "لوائح التزلج الفني",
-    description: "القواعد والتقييم للتزلج الفني",
-    size: "3.2 MB",
-    pages: "58 صفحة",
-    lastUpdated: "2023-12-20",
-    language: "العربية",
-    icon: "⛸️",
-  },
-]
+const defaultDocuments: Document[] = []
 
 export default function RegulationsDownload({ documents }: RegulationsDownloadProps) {
   const docs = documents || defaultDocuments
@@ -66,33 +33,21 @@ export default function RegulationsDownload({ documents }: RegulationsDownloadPr
           <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
             <CardHeader>
               <CardTitle className="flex items-start text-lg">
-                <span className="text-3xl ml-3">{doc.icon}</span>
+                <span className="text-3xl ml-3">📄</span>
                 <span>{doc.title}</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600 mb-4 text-sm">{doc.description}</p>
-              <div className="space-y-2 mb-4 text-sm text-gray-500">
-                <div className="flex items-center justify-between">
-                  <span>الحجم:</span>
-                  <span className="font-medium">{doc.size}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span>الصفحات:</span>
-                  <span className="font-medium">{doc.pages}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span>اللغة:</span>
-                  <span className="font-medium">{doc.language}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <Calendar className="h-4 w-4 ml-1 inline" />
-                  <span>آخر تحديث:</span>
-                  <span className="font-medium">{new Date(doc.lastUpdated).toLocaleDateString("ar-EG")}</span>
-                </div>
+              <div className="mb-4 text-sm text-gray-500">
+                {doc.file?.asset?.size && (
+                  <div className="flex items-center justify-between">
+                    <span>الحجم:</span>
+                    <span className="font-medium">{(doc.file.asset.size / 1024 / 1024).toFixed(2)} MB</span>
+                  </div>
+                )}
               </div>
               <Button className="w-full bg-red-600 hover:bg-red-700" asChild>
-                <a href={doc.file?.asset?.url || "#"} download>
+                <a href={doc.file?.asset?.url || "#"} download target="_blank" rel="noopener noreferrer">
                   <Download className="h-4 w-4 ml-2" />
                   تحميل PDF
                 </a>
@@ -116,6 +71,6 @@ export default function RegulationsDownload({ documents }: RegulationsDownloadPr
           </div>
         </CardContent>
       </Card>
-    </section>
+    </section >
   )
 }
