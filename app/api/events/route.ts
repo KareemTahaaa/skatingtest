@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server"
 import { getAllEvents } from "@/lib/sanity.queries"
 
+export const dynamic = "force-dynamic"
+
 export async function GET() {
   try {
     const events = await getAllEvents()

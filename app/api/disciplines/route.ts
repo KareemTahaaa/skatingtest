@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server"
 import { getAllSportDisciplines } from "@/lib/sanity.queries"
 
+export const dynamic = "force-dynamic"
+
 export async function GET() {
   try {
     const disciplines = await getAllSportDisciplines()
