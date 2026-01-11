@@ -8,7 +8,7 @@ export async function GET() {
     const disciplines = await getAllSportDisciplines()
 
     // Format the disciplines for the frontend
-    const formattedDisciplines = disciplines.map((discipline) => ({
+    const formattedDisciplines = disciplines.map((discipline: any) => ({
       title: discipline.title,
       slug: discipline.slug.current,
       icon: discipline.icon,
