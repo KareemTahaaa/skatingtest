@@ -14,6 +14,7 @@ import heroSlide from "./schema/heroSlide"
 import regulations from "./schema/regulations"
 import result from "./schema/result"
 import socialMediaLinks from "./schema/socialMediaLinks"
+import author from "./schema/author"
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -31,6 +32,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     regulations,
     result,
     socialMediaLinks,
+    author,
   ],
 }
 
