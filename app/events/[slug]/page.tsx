@@ -10,7 +10,7 @@ import { formatDate } from "@/lib/utils"
 import { PortableText } from "@portabletext/react"
 import { portableTextComponents } from "@/components/portable-text-components"
 import EventCountdown from "@/components/event-countdown"
-import EventShareLinks from "@/components/event-share-links"
+
 
 export const revalidate = 60 // Revalidate this page every 60 seconds
 
@@ -114,30 +114,7 @@ export default async function EventDetailPage({ params }: { params: { slug: stri
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className="flex flex-wrap gap-4 mb-6">
-          <Button variant="outline" size="sm" className="flex items-center gap-2">
-            <span>المتابعة</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-          </Button>
-          <EventShareLinks
-            eventTitle={event.title}
-            eventUrl={typeof window !== "undefined" ? window.location.href : ""}
-          />
-        </div>
+
 
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

@@ -439,6 +439,24 @@ export async function getSiteSettings() {
   }
 }
 
+// Social Media Links
+export async function getSocialMediaLinks() {
+  try {
+    const links = await client.fetch(
+      `*[_type == "socialMediaLinks"][0] {
+        facebook,
+        instagram,
+        twitter,
+        linkedin
+      }`,
+    )
+    return links || {}
+  } catch (error) {
+    console.error("Error fetching social media links:", error)
+    return {}
+  }
+}
+
 // Page Metadata
 export async function getHomePageMeta() {
   if (useMockData()) {

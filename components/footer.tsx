@@ -4,7 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react"
 import { useEffect, useState } from "react"
-import { getSiteSettings } from "@/lib/sanity.queries"
+import { getSiteSettings, getSocialMediaLinks } from "@/lib/sanity.queries"
 
 interface SiteSettings {
   contactInfo?: {
@@ -27,12 +27,6 @@ interface SiteSettings {
       hours?: string
     }>
   }
-  socialMedia?: {
-    facebook?: string
-    instagram?: string
-    twitter?: string
-    linkedin?: string
-  }
   logo?: {
     light?: {
       asset?: {
@@ -47,23 +41,35 @@ interface SiteSettings {
   }
 }
 
+interface SocialMediaLinks {
+  facebook?: string
+  instagram?: string
+  twitter?: string
+  linkedin?: string
+}
+
 export default function Footer() {
   const [settings, setSettings] = useState<SiteSettings | null>(null)
+  const [socialLinks, setSocialLinks] = useState<SocialMediaLinks | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const fetchSettings = async () => {
+    const fetchData = async () => {
       try {
-        const data = await getSiteSettings()
-        setSettings(data)
+        const [settingsData, socialData] = await Promise.all([
+          getSiteSettings(),
+          getSocialMediaLinks()
+        ])
+        setSettings(settingsData)
+        setSocialLinks(socialData)
       } catch (error) {
-        console.error("Failed to fetch site settings:", error)
+        console.error("Failed to fetch footer data:", error)
       } finally {
         setLoading(false)
       }
     }
 
-    fetchSettings()
+    fetchData()
   }, [])
 
   return (
@@ -176,9 +182,9 @@ export default function Footer() {
           </div>
 
           <div className="flex space-x-4 space-x-reverse">
-            {settings?.socialMedia?.facebook ? (
+            {socialLinks?.facebook ? (
               <Link
-                href={settings.socialMedia.facebook}
+                href={socialLinks.facebook}
                 className="hover:text-red-400"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -192,9 +198,9 @@ export default function Footer() {
                 <span className="sr-only">فيسبوك</span>
               </Link>
             )}
-            {settings?.socialMedia?.instagram ? (
+            {socialLinks?.instagram ? (
               <Link
-                href={settings.socialMedia.instagram}
+                href={socialLinks.instagram}
                 className="hover:text-red-400"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -208,9 +214,9 @@ export default function Footer() {
                 <span className="sr-only">انستجرام</span>
               </Link>
             )}
-            {settings?.socialMedia?.linkedin ? (
+            {socialLinks?.linkedin ? (
               <Link
-                href={settings.socialMedia.linkedin}
+                href={socialLinks.linkedin}
                 className="hover:text-red-400"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -224,9 +230,9 @@ export default function Footer() {
                 <span className="sr-only">لينكد إن</span>
               </Link>
             )}
-            {settings?.socialMedia?.twitter ? (
+            {socialLinks?.twitter ? (
               <Link
-                href={settings.socialMedia.twitter}
+                href={socialLinks.twitter}
                 className="hover:text-red-400"
                 target="_blank"
                 rel="noopener noreferrer"

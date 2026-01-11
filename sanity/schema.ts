@@ -9,12 +9,11 @@ import siteSettings from "./schema/siteSettings"
 import about from "./schema/about"
 import contact from "./schema/contact"
 import newsPage from "./schema/newsPage"
-
 import homePage from "./schema/homePage"
 import heroSlide from "./schema/heroSlide"
 import regulations from "./schema/regulations"
-
 import result from "./schema/result"
+import socialMediaLinks from "./schema/socialMediaLinks"
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -31,6 +30,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     heroSlide,
     regulations,
     result,
+    socialMediaLinks,
   ],
 }
 

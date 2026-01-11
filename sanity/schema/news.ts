@@ -41,6 +41,12 @@ export default defineType({
         hotspot: true,
       },
     }),
+    defineField({
+      name: "discipline",
+      title: "الرياضة",
+      type: "reference",
+      to: { type: "sportDiscipline" },
+    }),
 
     defineField({
       name: "publishedAt",
