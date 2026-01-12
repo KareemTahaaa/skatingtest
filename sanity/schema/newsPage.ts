@@ -29,5 +29,13 @@ export default defineType({
       title: "وصف القسم الرئيسي",
       type: "text",
     }),
+    defineField({
+      name: "backgroundImage",
+      title: "صورة الخلفية",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    }),
   ],
 })

@@ -523,7 +523,12 @@ export async function getNewsPageMeta() {
         metaTitle,
         metaDescription,
         heroTitle,
-        heroDescription
+        heroDescription,
+        backgroundImage {
+          asset-> {
+            url
+          }
+        }
       }`,
     )
   } catch (error) {

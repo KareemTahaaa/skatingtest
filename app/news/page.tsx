@@ -53,6 +53,7 @@ export default async function NewsPage({ searchParams }: { searchParams?: { disc
   // Use Sanity hero title/description by default, override if discipline filter is active
   let currentDisciplineName = newsPageData?.heroTitle || "الأخبار"
   let currentHeroDescription = newsPageData?.heroDescription
+  const currentBackgroundImage = newsPageData?.backgroundImage?.asset?.url
 
   if (disciplineFilter && disciplineFilter !== "all") {
     const discipline = sportDisciplines.find((d: any) => d.slug?.current === disciplineFilter)
@@ -65,7 +66,11 @@ export default async function NewsPage({ searchParams }: { searchParams?: { disc
   return (
     <main className="min-h-screen bg-gray-100">
       <Header />
-      <NewsHero title={currentDisciplineName} description={currentHeroDescription} />
+      <NewsHero
+        title={currentDisciplineName}
+        description={currentHeroDescription}
+        backgroundImage={currentBackgroundImage}
+      />
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-2 space-x-reverse">
