@@ -521,7 +521,9 @@ export async function getNewsPageMeta() {
     return await client.fetch(
       `*[_type == "newsPage"][0] {
         metaTitle,
-        metaDescription
+        metaDescription,
+        heroTitle,
+        heroDescription
       }`,
     )
   } catch (error) {

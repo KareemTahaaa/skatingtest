@@ -28,10 +28,17 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function NewsPage({ searchParams }: { searchParams?: { discipline?: string } }) {
   let news = []
   let sportDisciplines = []
+  let newsPageData = null
 
   try {
-    news = await getAllNews()
-    sportDisciplines = await getAllSportDisciplines()
+    const [newsData, disciplinesData, pageData] = await Promise.all([
+      getAllNews(),
+      getAllSportDisciplines(),
+      getNewsPageMeta()
+    ])
+    news = newsData
+    sportDisciplines = disciplinesData
+    newsPageData = pageData
   } catch (error) {
     console.error("Error fetching data:", error)
   }
@@ -40,21 +47,25 @@ export default async function NewsPage({ searchParams }: { searchParams?: { disc
   let filteredNews = news
 
   if (disciplineFilter && disciplineFilter !== "all") {
-    filteredNews = news.filter((item) => item.sportDisciplines?.some((d: any) => d.slug?.current === disciplineFilter))
+    filteredNews = news.filter((item: any) => item.sportDisciplines?.some((d: any) => d.slug?.current === disciplineFilter))
   }
 
-  let currentDisciplineName = "الأخبار"
+  // Use Sanity hero title/description by default, override if discipline filter is active
+  let currentDisciplineName = newsPageData?.heroTitle || "الأخبار"
+  let currentHeroDescription = newsPageData?.heroDescription
+
   if (disciplineFilter && disciplineFilter !== "all") {
-    const discipline = sportDisciplines.find((d) => d.slug?.current === disciplineFilter)
+    const discipline = sportDisciplines.find((d: any) => d.slug?.current === disciplineFilter)
     if (discipline) {
       currentDisciplineName = `أخبار ${discipline.title}`
+      currentHeroDescription = undefined // Clear generic description when showing specific discipline
     }
   }
 
   return (
     <main className="min-h-screen bg-gray-100">
       <Header />
-      <NewsHero title={currentDisciplineName} />
+      <NewsHero title={currentDisciplineName} description={currentHeroDescription} />
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-2 space-x-reverse">
