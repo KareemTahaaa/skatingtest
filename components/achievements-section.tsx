@@ -21,7 +21,6 @@ interface AchievementsSectionProps {
 
 // Helper to pick icon based on simple heuristic or random if not provided
 // Since schema doesn't have icon picker for achievements yet, we'll cycle or default
-import { Award, Medal, Star, Globe } from "lucide-react"
 
 export default function AchievementsSection({ data }: AchievementsSectionProps) {
   const defaultAchievements = [
