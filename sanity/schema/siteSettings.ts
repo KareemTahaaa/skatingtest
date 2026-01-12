@@ -138,6 +138,55 @@ export default defineType({
             },
           ],
         },
+        {
+          name: "whatsapp",
+          title: "واتساب",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                {
+                  name: "label",
+                  title: "التسمية (مثلاً: خدمة العملاء)",
+                  type: "string",
+                },
+                {
+                  name: "number",
+                  title: "الرقم",
+                  type: "string",
+                },
+                {
+                  name: "note",
+                  title: "ملاحظة (مثلاً: متاح 24/7)",
+                  type: "string",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "websiteInfo",
+          title: "معلومات الموقع الإلكتروني",
+          type: "object",
+          fields: [
+            {
+              name: "url",
+              title: "رابط الموقع",
+              type: "url",
+            },
+            {
+              name: "label",
+              title: "النص المعروض",
+              type: "string",
+            },
+            {
+              name: "note",
+              title: "ملاحظة (مثلاً: النسخة الإنجليزية متاحة)",
+              type: "string",
+            },
+          ],
+        },
       ],
     }),
     defineField({

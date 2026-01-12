@@ -26,6 +26,16 @@ interface SiteSettings {
       days?: string
       hours?: string
     }>
+    whatsapp?: Array<{
+      label?: string
+      number?: string
+      note?: string
+    }>
+    websiteInfo?: {
+      url?: string
+      label?: string
+      note?: string
+    }
   }
   logo?: {
     light?: {
@@ -164,6 +174,23 @@ export default function Footer() {
                 <li className="flex items-center text-sm sm:text-base">
                   <span className="ml-2">📧</span>
                   <span>info@ensf.com</span>
+                </li>
+              )}
+              {!loading && settings?.contactInfo?.whatsapp && settings.contactInfo.whatsapp.length > 0 && (
+                settings.contactInfo.whatsapp.map((wa, index) => (
+                  <li key={index} className="flex items-center text-sm sm:text-base">
+                    <span className="ml-2">📱</span>
+                    {/* <span>{wa.label}: </span> */}
+                    <span dir="ltr">{wa.number}</span>
+                  </li>
+                ))
+              )}
+              {!loading && settings?.contactInfo?.websiteInfo?.url && (
+                <li className="flex items-center text-sm sm:text-base">
+                  <span className="ml-2">🌐</span>
+                  <a href={settings.contactInfo.websiteInfo.url} target="_blank" rel="noopener noreferrer" className="hover:text-red-400">
+                    {settings.contactInfo.websiteInfo.label || "زيارة الموقع"}
+                  </a>
                 </li>
               )}
             </ul>

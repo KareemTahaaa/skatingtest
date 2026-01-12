@@ -1,47 +1,54 @@
 import { MapPin, Phone, Mail, Clock, Globe, MessageCircle } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
-export default function ContactInfo() {
+interface ContactInfoProps {
+  data?: any
+}
+
+export default function ContactInfo({ data }: ContactInfoProps) {
   const contactMethods = [
     {
       icon: MapPin,
       title: "العنوان",
-      details: ["256A شارع الهرم، الجيزة", "القاهرة، مصر 12345"],
+      details: data?.address ? [
+        data.address.street,
+        `${data.address.city || ''} ${data.address.country || ''} ${data.address.postalCode || ''}`
+      ].filter(Boolean) : ["256A شارع الهرم، الجيزة", "القاهرة، مصر 12345"],
       color: "text-blue-600",
       bgColor: "bg-blue-50",
     },
     {
       icon: Phone,
       title: "الهاتف",
-      details: ["+20 2 1234 5678", "+20 100 123 4567"],
+      details: data?.phone?.map((p: any) => p.number) || ["+20 2 1234 5678", "+20 100 123 4567"],
       color: "text-green-600",
       bgColor: "bg-green-50",
     },
     {
       icon: Mail,
       title: "البريد الإلكتروني",
-      details: ["info@ensf.com", "contact@ensf.com"],
+      details: data?.email?.map((e: any) => e.address) || ["info@ensf.com", "contact@ensf.com"],
       color: "text-red-600",
       bgColor: "bg-red-50",
     },
     {
       icon: MessageCircle,
       title: "واتساب",
-      details: ["+20 100 123 4567", "متاح 24/7"],
+      details: data?.whatsapp?.map((w: any) => w.number) || ["+20 100 123 4567", "متاح 24/7"],
       color: "text-green-600",
       bgColor: "bg-green-50",
     },
     {
       icon: Globe,
       title: "الموقع الإلكتروني",
-      details: ["www.ensf.com", "النسخة الإنجليزية متاحة"],
+      details: data?.websiteInfo?.url ? [data.websiteInfo.url] : ["www.ensf.com", "النسخة الإنجليزية متاحة"],
       color: "text-purple-600",
       bgColor: "bg-purple-50",
     },
     {
       icon: Clock,
       title: "ساعات العمل",
-      details: ["الأحد - الخميس: 9:00 ص - 5:00 م", "السبت: 9:00 ص - 2:00 م"],
+      details: data?.workingHours?.map((w: any) => `${w.days}: ${w.hours}`) || ["الأحد - الخميس: 9:00 ص - 5:00 م", "السبت: 9:00 ص - 2:00 م"],
       color: "text-orange-600",
       bgColor: "bg-orange-50",
     },

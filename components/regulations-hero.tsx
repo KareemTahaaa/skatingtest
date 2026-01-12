@@ -12,7 +12,7 @@ interface RegulationsHeroProps {
 
 export default function RegulationsHero({ data }: RegulationsHeroProps) {
   const title = data?.title || "اللوائح والقوانين"
-  const subtitle = data?.subtitle || "جميع القوانين واللوائح المنظمة لأنشطة الاتحاد المصري للتزلج"
+  const subtitle = data?.subtitle || "جميع القوانين واللوائح المنظمة لأنشطة الاتحاد المصري لرياضات الانزلاق"
   const backgroundImage = data?.backgroundImage?.asset?.url || "/placeholder.svg?height=400&width=1200"
 
   return (

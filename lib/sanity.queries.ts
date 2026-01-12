@@ -409,6 +409,14 @@ export async function getSiteSettings() {
       `*[_type == "siteSettings"][0] {
         siteName,
         siteDescription,
+        contactInfo {
+          address,
+          phone,
+          email,
+          workingHours,
+          whatsapp,
+          websiteInfo
+        },
         logo {
           asset->{
             _id,

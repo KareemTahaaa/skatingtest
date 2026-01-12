@@ -29,7 +29,9 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const siteSettings = await getSiteSettings()
+
   return (
     <main className="min-h-screen bg-gray-100">
       <Header />
@@ -66,7 +68,7 @@ export default function ContactPage() {
             <ContactForm />
           </div>
           <div className="lg:col-span-1">
-            <ContactInfo />
+            <ContactInfo data={siteSettings?.contactInfo} />
           </div>
         </div>
 
