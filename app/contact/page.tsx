@@ -1,6 +1,4 @@
 import type { Metadata } from "next"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import ContactHero from "@/components/contact-hero"
 import ContactForm from "@/components/contact-form"
 import ContactInfo from "@/components/contact-info"
@@ -34,7 +32,6 @@ export default async function ContactPage() {
 
   return (
     <main className="min-h-screen bg-gray-100">
-      <Header />
       <ContactHero />
       <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
@@ -76,7 +73,6 @@ export default async function ContactPage() {
         <ContactMap />
         <ContactFAQ />
       </div>
-      <Footer />
     </main>
   )
 }

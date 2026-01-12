@@ -6,7 +6,6 @@ import QuoteSectionContainer from "@/components/quote-section-container"
 import UpcomingEvents from "@/components/upcoming-events"
 import NewsGrid from "@/components/news-grid"
 import ContactSection from "@/components/contact-section"
-import Footer from "@/components/footer"
 import { getAllNews, getAllEvents } from "@/lib/sanity.queries"
 import { getHomePageMeta, getSiteSettings } from "@/lib/sanity.queries"
 
@@ -46,7 +45,6 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-gray-100">
-      <Header />
       <HeroSectionContainer />
       <CategoriesSectionContainer />
       <QuoteSectionContainer />
@@ -71,7 +69,6 @@ export default async function Home() {
       <UpcomingEvents events={upcomingEvents} />
 
       <ContactSection />
-      <Footer />
     </main>
   )
 }

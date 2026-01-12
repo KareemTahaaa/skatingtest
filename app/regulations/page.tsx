@@ -1,5 +1,3 @@
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import RegulationsHero from "@/components/regulations-hero"
 import RegulationsTableOfContents from "@/components/regulations-table-of-contents"
 import GeneralRegulations from "@/components/general-regulations"
@@ -25,7 +23,6 @@ export default async function RegulationsPage() {
 
   return (
     <main className="min-h-screen bg-gray-50">
-      <Header />
       <RegulationsHero data={regulations?.hero} />
       <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
@@ -71,7 +68,6 @@ export default async function RegulationsPage() {
           </div>
         </div>
       </div>
-      <Footer />
     </main>
   )
 }

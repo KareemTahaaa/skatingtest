@@ -1,6 +1,4 @@
 import type { Metadata } from "next"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import AboutHero from "@/components/about-hero"
 import MissionSection from "@/components/mission-section"
 import HistorySection from "@/components/history-section"
@@ -36,7 +34,6 @@ export default async function AboutPage() {
 
   return (
     <main className="min-h-screen bg-gray-100">
-      <Header />
       <AboutHero
         title={aboutData?.heroTitle}
         description={aboutData?.heroDescription}
@@ -56,7 +53,6 @@ export default async function AboutPage() {
       <LeadershipSection data={aboutData?.leadership} />
       <AchievementsSection data={aboutData?.achievements} />
       <ContactSection />
-      <Footer />
     </main>
   )
 }

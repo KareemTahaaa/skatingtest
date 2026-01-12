@@ -1,6 +1,4 @@
 import type { Metadata } from "next"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import EventsHero from "@/components/events-hero"
 import EventsContent from "@/components/events-content"
 import { getAllEvents, getAllSportDisciplines, getEventsPageMeta, getSiteSettings } from "@/lib/sanity.queries"
@@ -40,14 +38,14 @@ export default async function EventsPage({ searchParams }: { searchParams?: { di
   let filteredEvents = events
 
   if (disciplineFilter && disciplineFilter !== "all") {
-    filteredEvents = events.filter((item) =>
+    filteredEvents = events.filter((item: any) =>
       item.discipline?.slug?.current === disciplineFilter
     )
   }
 
   let currentDisciplineName = "الفعاليات"
   if (disciplineFilter && disciplineFilter !== "all") {
-    const discipline = sportDisciplines.find((d) => d.slug?.current === disciplineFilter)
+    const discipline = sportDisciplines.find((d: any) => d.slug?.current === disciplineFilter)
     if (discipline) {
       currentDisciplineName = `فعاليات ${discipline.name}`
     }
@@ -55,7 +53,6 @@ export default async function EventsPage({ searchParams }: { searchParams?: { di
 
   return (
     <main className="min-h-screen bg-gray-100">
-      <Header />
       <EventsHero title={currentDisciplineName} />
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
@@ -87,7 +84,6 @@ export default async function EventsPage({ searchParams }: { searchParams?: { di
           <EventsContent initialEvents={filteredEvents} sportDisciplines={sportDisciplines} />
         </Suspense>
       </div>
-      <Footer />
     </main>
   )
 }

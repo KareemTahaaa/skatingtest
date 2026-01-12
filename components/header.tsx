@@ -1,10 +1,9 @@
 "use client"
 
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
-import { getAllSportDisciplines } from "@/lib/sanity.queries"
 
 interface SportDiscipline {
   _id: string
@@ -14,30 +13,14 @@ interface SportDiscipline {
   }
 }
 
-export default function Header() {
+interface HeaderProps {
+  disciplines: SportDiscipline[]
+}
+
+export default function Header({ disciplines }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isDisciplinesOpen, setIsDisciplinesOpen] = useState(false)
-  const [disciplines, setDisciplines] = useState<SportDiscipline[]>([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const fetchDisciplines = async () => {
-      try {
-        const data = await getAllSportDisciplines()
-        setDisciplines(data || [])
-      } catch (error) {
-        console.error("Failed to fetch disciplines:", error)
-        setDisciplines([])
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchDisciplines()
-  }, [])
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
-  const toggleDisciplines = () => setIsDisciplinesOpen(!isDisciplinesOpen)
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">

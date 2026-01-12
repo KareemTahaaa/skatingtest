@@ -1,6 +1,4 @@
 import type { Metadata } from "next"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import NewsHero from "@/components/news-hero"
 import NewsGrid from "@/components/news-grid"
 import { getAllNews, getAllSportDisciplines, getNewsPageMeta, getSiteSettings } from "@/lib/sanity.queries"
@@ -65,7 +63,6 @@ export default async function NewsPage({ searchParams }: { searchParams?: { disc
 
   return (
     <main className="min-h-screen bg-gray-100">
-      <Header />
       <NewsHero
         title={currentDisciplineName}
         description={currentHeroDescription}
@@ -101,7 +98,6 @@ export default async function NewsPage({ searchParams }: { searchParams?: { disc
           <NewsGrid news={filteredNews} />
         </Suspense>
       </div>
-      <Footer />
     </main>
   )
 }

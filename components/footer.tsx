@@ -1,86 +1,22 @@
-"use client"
-
 import Link from "next/link"
 import Image from "next/image"
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react"
-import { useEffect, useState } from "react"
 import { getSiteSettings, getSocialMediaLinks } from "@/lib/sanity.queries"
 
-interface SiteSettings {
-  contactInfo?: {
-    address?: {
-      street?: string
-      city?: string
-      country?: string
-      postalCode?: string
-    }
-    phone?: Array<{
-      label?: string
-      number?: string
-    }>
-    email?: Array<{
-      label?: string
-      address?: string
-    }>
-    workingHours?: Array<{
-      days?: string
-      hours?: string
-    }>
-    whatsapp?: Array<{
-      label?: string
-      number?: string
-      note?: string
-    }>
-    websiteInfo?: {
-      url?: string
-      label?: string
-      note?: string
-    }
+export default async function Footer() {
+  let settings = null
+  let socialLinks = null
+
+  try {
+    const [settingsData, socialData] = await Promise.all([
+      getSiteSettings(),
+      getSocialMediaLinks()
+    ])
+    settings = settingsData
+    socialLinks = socialData
+  } catch (error) {
+    console.error("Failed to fetch footer data:", error)
   }
-  logo?: {
-    light?: {
-      asset?: {
-        url?: string
-      }
-    }
-    dark?: {
-      asset?: {
-        url?: string
-      }
-    }
-  }
-}
-
-interface SocialMediaLinks {
-  facebook?: string
-  instagram?: string
-  twitter?: string
-  linkedin?: string
-}
-
-export default function Footer() {
-  const [settings, setSettings] = useState<SiteSettings | null>(null)
-  const [socialLinks, setSocialLinks] = useState<SocialMediaLinks | null>(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [settingsData, socialData] = await Promise.all([
-          getSiteSettings(),
-          getSocialMediaLinks()
-        ])
-        setSettings(settingsData)
-        setSocialLinks(socialData)
-      } catch (error) {
-        console.error("Failed to fetch footer data:", error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchData()
-  }, [])
 
   return (
     <footer className="bg-gray-900 text-white py-8 sm:py-10 md:py-12">
@@ -131,7 +67,7 @@ export default function Footer() {
           <div>
             <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">العنوان</h3>
             <address className="not-italic text-sm sm:text-base">
-              {!loading && settings?.contactInfo?.address ? (
+              {settings?.contactInfo?.address ? (
                 <>
                   <p>{settings.contactInfo.address.street}</p>
                   <p>
@@ -150,8 +86,8 @@ export default function Footer() {
           <div>
             <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">اتصل بنا</h3>
             <ul className="space-y-2">
-              {!loading && settings?.contactInfo?.phone && settings.contactInfo.phone.length > 0 ? (
-                settings.contactInfo.phone.map((phone, index) => (
+              {settings?.contactInfo?.phone && settings.contactInfo.phone.length > 0 ? (
+                settings.contactInfo.phone.map((phone: any, index: number) => (
                   <li key={index} className="flex items-center text-sm sm:text-base">
                     <span className="ml-2">📞</span>
                     <span>{phone.number}</span>
@@ -163,8 +99,8 @@ export default function Footer() {
                   <span>+20111111111</span>
                 </li>
               )}
-              {!loading && settings?.contactInfo?.email && settings.contactInfo.email.length > 0 ? (
-                settings.contactInfo.email.map((email, index) => (
+              {settings?.contactInfo?.email && settings.contactInfo.email.length > 0 ? (
+                settings.contactInfo.email.map((email: any, index: number) => (
                   <li key={index} className="flex items-center text-sm sm:text-base">
                     <span className="ml-2">📧</span>
                     <span>{email.address}</span>
@@ -176,16 +112,15 @@ export default function Footer() {
                   <span>info@ensf.com</span>
                 </li>
               )}
-              {!loading && settings?.contactInfo?.whatsapp && settings.contactInfo.whatsapp.length > 0 && (
-                settings.contactInfo.whatsapp.map((wa, index) => (
+              {settings?.contactInfo?.whatsapp && settings.contactInfo.whatsapp.length > 0 && (
+                settings.contactInfo.whatsapp.map((wa: any, index: number) => (
                   <li key={index} className="flex items-center text-sm sm:text-base">
                     <span className="ml-2">📱</span>
-                    {/* <span>{wa.label}: </span> */}
                     <span dir="ltr">{wa.number}</span>
                   </li>
                 ))
               )}
-              {!loading && settings?.contactInfo?.websiteInfo?.url && (
+              {settings?.contactInfo?.websiteInfo?.url && (
                 <li className="flex items-center text-sm sm:text-base">
                   <span className="ml-2">🌐</span>
                   <a href={settings.contactInfo.websiteInfo.url} target="_blank" rel="noopener noreferrer" className="hover:text-red-400">

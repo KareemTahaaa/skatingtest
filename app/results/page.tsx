@@ -1,6 +1,4 @@
 import type { Metadata } from "next"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import { Download, FileText, Eye } from "lucide-react"
 import { getResults } from "@/lib/sanity.queries"
 
@@ -54,8 +52,6 @@ export default async function ResultsPage() {
 
     return (
         <main className="min-h-screen bg-gray-50">
-            <Header />
-
             {/* Hero Section */}
             <section className="bg-gradient-to-r from-red-600 to-red-700 text-white py-20">
                 <div className="container mx-auto px-4 text-center">
@@ -135,8 +131,6 @@ export default async function ResultsPage() {
                     )}
                 </div>
             </section>
-
-            <Footer />
         </main>
     )
 }

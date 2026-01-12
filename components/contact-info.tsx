@@ -70,7 +70,7 @@ export default function ContactInfo({ data }: ContactInfoProps) {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-800 mb-1">{method.title}</h3>
-                {method.details.map((detail, detailIndex) => (
+                {method.details.map((detail: string, detailIndex: number) => (
                   <p key={detailIndex} className="text-gray-600 text-sm">
                     {detail}
                   </p>
