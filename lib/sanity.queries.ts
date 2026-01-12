@@ -484,7 +484,7 @@ export async function getHomePageMeta() {
   }
 }
 
-export async function getAboutPageMeta() {
+export async function getAboutPageData() {
   if (useMockData()) {
     return null
   }
@@ -493,7 +493,62 @@ export async function getAboutPageMeta() {
     return await client.fetch(
       `*[_type == "about"][0] {
         metaTitle,
-        metaDescription
+        metaDescription,
+        heroTitle,
+        heroDescription,
+        backgroundImage {
+          asset->{
+            url
+          }
+        },
+        missionTitle,
+        missionContent,
+        visionTitle,
+        visionContent,
+        valuesTitle,
+        valuesContent,
+        historyTitle,
+        historyContent,
+        milestones[] {
+            year,
+            title,
+            description
+        },
+        stats[] {
+            label,
+            value,
+            icon,
+            description
+        },
+        leadership {
+          title,
+          members[] {
+            name,
+            position,
+            bio,
+            email,
+            phone,
+            image {
+              asset->{
+                url
+              }
+            }
+          }
+        },
+        achievements {
+          title,
+          items[] {
+            title,
+            description,
+            year,
+            type,
+            image {
+              asset->{
+                url
+              }
+            }
+          }
+        }
       }`,
     )
   } catch (error) {

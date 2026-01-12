@@ -1,22 +1,28 @@
 import Image from "next/image"
 import Link from "next/link"
 
-export default function AboutHero() {
+interface AboutHeroProps {
+  title?: string
+  description?: string
+  image?: string
+}
+
+export default function AboutHero({ title, description, image }: AboutHeroProps) {
   return (
     <section className="relative h-[400px] md:h-[500px] overflow-hidden">
       <div className="absolute inset-0 bg-black/40 z-10"></div>
       <Image
-        src="/placeholder.svg?height=500&width=1200&text=الاتحاد+المصري+للتزلج"
-        alt="الاتحاد المصري للتزلج"
+        src={image || "/placeholder.svg?height=500&width=1200&text=الاتحاد+المصري+للتزلج"}
+        alt={title || "الاتحاد المصري للتزلج"}
         fill
         className="object-cover"
         priority
       />
       <div className="absolute inset-0 flex items-center justify-start z-20 p-8 md:p-12">
         <div className="text-right">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">من نحن</h1>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">{title || "من نحن"}</h1>
           <p className="text-xl md:text-2xl text-white/90 max-w-2xl">
-            الاتحاد المصري للتزلج - رائدون في تطوير رياضة التزلج في مصر والمنطقة العربية
+            {description || "الاتحاد المصري لرياضات الانزلاق - رائدون في تطوير رياضة التزلج في مصر والمنطقة العربية"}
           </p>
         </div>
       </div>

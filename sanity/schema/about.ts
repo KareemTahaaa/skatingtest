@@ -30,6 +30,14 @@ export default defineType({
       type: "text",
     }),
     defineField({
+      name: "backgroundImage",
+      title: "صورة الخلفية",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: "missionTitle",
       title: "عنوان المهمة",
       type: "string",
@@ -37,7 +45,30 @@ export default defineType({
     defineField({
       name: "missionContent",
       title: "محتوى المهمة",
-      type: "blockContent",
+      type: "text", // Changed to text to match UI usage
+      rows: 4,
+    }),
+    defineField({
+      name: "visionTitle",
+      title: "عنوان الرؤية",
+      type: "string",
+    }),
+    defineField({
+      name: "visionContent",
+      title: "محتوى الرؤية",
+      type: "text",
+      rows: 4,
+    }),
+    defineField({
+      name: "valuesTitle",
+      title: "عنوان القيم",
+      type: "string",
+    }),
+    defineField({
+      name: "valuesContent",
+      title: "محتوى القيم",
+      type: "text",
+      rows: 4,
     }),
     defineField({
       name: "historyTitle",
@@ -48,6 +79,21 @@ export default defineType({
       name: "historyContent",
       title: "محتوى التاريخ",
       type: "blockContent",
+    }),
+    defineField({
+      name: "milestones",
+      title: "المحطات التاريخية (Timeline)",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "year", title: "السنة", type: "string" },
+            { name: "title", title: "العنوان", type: "string" },
+            { name: "description", title: "الوصف", type: "text" },
+          ],
+        },
+      ],
     }),
     defineField({
       name: "stats",
@@ -71,8 +117,13 @@ export default defineType({
               name: "icon",
               title: "الأيقونة",
               type: "string",
-              description: "اسم الأيقونة من مكتبة Lucide",
+              description: "اسم الأيقونة (Users, Trophy, Calendar, MapPin)",
             },
+            {
+              name: "description",
+              title: "الوصف",
+              type: "string"
+            }
           ],
         },
       ],
@@ -109,6 +160,16 @@ export default defineType({
                   name: "bio",
                   title: "السيرة الذاتية",
                   type: "text",
+                },
+                {
+                  name: "email",
+                  title: "البريد الإلكتروني",
+                  type: "string"
+                },
+                {
+                  name: "phone",
+                  title: "رقم الهاتف",
+                  type: "string"
                 },
                 {
                   name: "image",
@@ -151,6 +212,16 @@ export default defineType({
                   name: "description",
                   title: "الوصف",
                   type: "text",
+                },
+                {
+                  name: "year",
+                  title: "السنة",
+                  type: "string"
+                },
+                {
+                  name: "type",
+                  title: "النوع (دولي/محلي)",
+                  type: "string"
                 },
                 {
                   name: "image",

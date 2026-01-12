@@ -1,7 +1,19 @@
 import Image from "next/image"
 
-export default function HistorySection() {
-  const milestones = [
+interface Milestone {
+  year?: string
+  title?: string
+  description?: string
+}
+
+interface HistorySectionProps {
+  title?: string
+  content?: string // blockContent in schema but simplistically treated as text here or we can use portable text if complex
+  milestones?: Milestone[]
+}
+
+export default function HistorySection({ title, content, milestones }: HistorySectionProps) {
+  const defaultMilestones = [
     {
       year: "2010",
       title: "تأسيس الاتحاد",
@@ -34,14 +46,17 @@ export default function HistorySection() {
     },
   ]
 
+  const displayMilestones = milestones && milestones.length > 0 ? milestones : defaultMilestones
+
   return (
     <section className="py-12 md:py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">تاريخنا ومسيرتنا</h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            رحلة طويلة من العمل والإنجازات في سبيل تطوير رياضة التزلج في مصر
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">{title || "تاريخنا ومسيرتنا"}</h2>
+          <div className="text-lg text-gray-600 max-w-3xl mx-auto prose">
+            {/* If content is complex block content we might need PortableText, but if simple text: */}
+            <p>{(typeof content === 'string' ? content : "رحلة طويلة من العمل والإنجازات في سبيل تطوير رياضة التزلج في مصر")}</p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -60,7 +75,7 @@ export default function HistorySection() {
           </div>
 
           <div className="space-y-6">
-            {milestones.map((milestone, index) => (
+            {displayMilestones.map((milestone, index) => (
               <div key={index} className="flex items-start space-x-4 space-x-reverse">
                 <div className="bg-red-600 text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-sm flex-shrink-0">
                   {milestone.year}

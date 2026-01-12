@@ -8,18 +8,18 @@ import LeadershipSection from "@/components/leadership-section"
 import AchievementsSection from "@/components/achievements-section"
 import StatsSection from "@/components/stats-section"
 import ContactSection from "@/components/contact-section"
-import { getAboutPageMeta, getSiteSettings } from "@/lib/sanity.queries"
+import { getAboutPageData, getSiteSettings } from "@/lib/sanity.queries"
 
 export const revalidate = 60
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
-    const [pageMeta, siteSettings] = await Promise.all([getAboutPageMeta(), getSiteSettings()])
+    const [pageData, siteSettings] = await Promise.all([getAboutPageData(), getSiteSettings()])
 
     return {
-      title: pageMeta?.metaTitle || `من نحن - ${siteSettings?.siteName || "الاتحاد المصري للتزلج"}`,
+      title: pageData?.metaTitle || `من نحن - ${siteSettings?.siteName || "الاتحاد المصري للتزلج"}`,
       description:
-        pageMeta?.metaDescription ||
+        pageData?.metaDescription ||
         "تعرف على الاتحاد المصري للتزلج، رسالتنا، رؤيتنا، وإنجازاتنا في تطوير رياضة التزلج في مصر",
     }
   } catch (error) {
@@ -31,16 +31,30 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const aboutData = await getAboutPageData()
+
   return (
     <main className="min-h-screen bg-gray-100">
       <Header />
-      <AboutHero />
-      <MissionSection />
-      <StatsSection />
-      <HistorySection />
-      <LeadershipSection />
-      <AchievementsSection />
+      <AboutHero
+        title={aboutData?.heroTitle}
+        description={aboutData?.heroDescription}
+        image={aboutData?.backgroundImage?.asset?.url}
+      />
+      <MissionSection
+        mission={{ title: aboutData?.missionTitle, content: aboutData?.missionContent }}
+        vision={{ title: aboutData?.visionTitle, content: aboutData?.visionContent }}
+        values={{ title: aboutData?.valuesTitle, content: aboutData?.valuesContent }}
+      />
+      <StatsSection stats={aboutData?.stats} />
+      <HistorySection
+        title={aboutData?.historyTitle}
+        content={aboutData?.historyContent}
+        milestones={aboutData?.milestones}
+      />
+      <LeadershipSection data={aboutData?.leadership} />
+      <AchievementsSection data={aboutData?.achievements} />
       <ContactSection />
       <Footer />
     </main>
