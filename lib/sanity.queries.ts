@@ -557,7 +557,7 @@ export async function getAboutPageData() {
   }
 }
 
-export async function getContactPageMeta() {
+export async function getContactPageData() {
   if (useMockData()) {
     return null
   }
@@ -566,11 +566,20 @@ export async function getContactPageMeta() {
     return await client.fetch(
       `*[_type == "contact"][0] {
         metaTitle,
-        metaDescription
+        metaDescription,
+        hero {
+          title,
+          subtitle,
+          backgroundImage {
+            asset-> {
+              url
+            }
+          }
+        }
       }`,
     )
   } catch (error) {
-    console.error("Error fetching contact page metadata:", error)
+    console.error("Error fetching contact page data:", error)
     return null
   }
 }

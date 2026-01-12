@@ -5,18 +5,18 @@ import ContactInfo from "@/components/contact-info"
 import ContactMap from "@/components/contact-map"
 import ContactDepartments from "@/components/contact-departments"
 import ContactFAQ from "@/components/contact-faq"
-import { getContactPageMeta, getSiteSettings } from "@/lib/sanity.queries"
+import { getContactPageData, getSiteSettings } from "@/lib/sanity.queries"
 
 export const revalidate = 60
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
-    const [pageMeta, siteSettings] = await Promise.all([getContactPageMeta(), getSiteSettings()])
+    const [pageData, siteSettings] = await Promise.all([getContactPageData(), getSiteSettings()])
 
     return {
-      title: pageMeta?.metaTitle || `اتصل بنا - ${siteSettings?.siteName || "الاتحاد المصري للتزلج"}`,
+      title: pageData?.metaTitle || `اتصل بنا - ${siteSettings?.siteName || "الاتحاد المصري للتزلج"}`,
       description:
-        pageMeta?.metaDescription || "تواصل مع الاتحاد المصري للتزلج - معلومات الاتصال، النموذج الإلكتروني، والعنوان",
+        pageData?.metaDescription || "تواصل مع الاتحاد المصري للتزلج - معلومات الاتصال، النموذج الإلكتروني، والعنوان",
     }
   } catch (error) {
     console.error("Error fetching page metadata:", error)
@@ -28,11 +28,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function ContactPage() {
-  const siteSettings = await getSiteSettings()
+  const [pageData, siteSettings] = await Promise.all([getContactPageData(), getSiteSettings()])
 
   return (
     <main className="min-h-screen bg-gray-100">
-      <ContactHero />
+      <ContactHero data={pageData?.hero} />
       <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <div className="flex items-center justify-between mb-6">
