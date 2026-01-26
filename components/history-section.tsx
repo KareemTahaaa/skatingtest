@@ -14,41 +14,10 @@ interface HistorySectionProps {
   milestones?: Milestone[]
 }
 
-export default function HistorySection({ title, content, milestones }: HistorySectionProps) {
-  const defaultMilestones = [
-    {
-      year: "2010",
-      title: "تأسيس الاتحاد",
-      description: "تم تأسيس الاتحاد المصري للتزلج كأول اتحاد متخصص في رياضة التزلج في مصر",
-    },
-    {
-      year: "2015",
-      title: "أول بطولة دولية",
-      description: "استضافة أول بطولة دولية للتزلج في مصر بمشاركة 8 دول عربية وأفريقية",
-    },
-    {
-      year: "2018",
-      title: "الانضمام للاتحاد الدولي",
-      description: "انضمام الاتحاد المصري للتزلج رسمياً للاتحاد الدولي للتزلج",
-    },
-    {
-      year: "2020",
-      title: "إطلاق أكاديمية التزلج",
-      description: "افتتاح أكاديمية التزلج المصرية لتدريب الناشئين والمواهب الشابة",
-    },
-    {
-      year: "2023",
-      title: "أول ميدالية دولية",
-      description: "حصول المنتخب المصري على أول ميدالية ذهبية في البطولة العربية للتزلج",
-    },
-    {
-      year: "2025",
-      title: "التوسع والتطوير",
-      description: "إطلاق خطة التوسع لتشمل جميع محافظات مصر وافتتاح مراكز تدريب جديدة",
-    },
-  ]
+export default function HistorySection({ title, subtitle, content, image, milestones }: HistorySectionProps) {
 
-  const displayMilestones = milestones && milestones.length > 0 ? milestones : defaultMilestones
+
+  const displayMilestones = milestones && milestones.length > 0 ? milestones : []
 
   return (
     <section className="py-12 md:py-16 bg-gray-50">
@@ -57,20 +26,28 @@ export default function HistorySection({ title, content, milestones }: HistorySe
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">{title || "تاريخنا ومسيرتنا"}</h2>
           <div className="text-lg text-gray-600 max-w-3xl mx-auto prose">
             {/* If content is complex block content we might need PortableText, but if simple text: */}
-            <p>{(typeof content === 'string' ? content : "رحلة طويلة من العمل والإنجازات في سبيل تطوير رياضة التزلج في مصر")}</p>
+            <p>{subtitle || "رحلة طويلة من العمل والإنجازات في سبيل تطوير رياضة التزلج في مصر"}</p>
+            {content && typeof content === 'string' && <p className="mt-4">{content}</p>}
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="relative">
-            <Image
-              src="/placeholder.svg?height=400&width=600&text=تاريخ+الاتحاد+المصري+للتزلج"
-              alt="تاريخ الاتحاد المصري للتزلج"
-              width={600}
-              height={400}
-              className="rounded-lg shadow-lg"
-            />
-
+            {image && (
+              <Image
+                src={image}
+                alt="تاريخ الاتحاد المصري للتزلج"
+                width={600}
+                height={400}
+                className="rounded-lg shadow-lg"
+              />
+            )}
+            {image && (
+              <div className="absolute -bottom-6 -right-6 bg-red-600 text-white p-4 rounded-lg shadow-lg">
+                <div className="text-2xl font-bold">15+</div>
+                <div className="text-sm">سنة من التميز</div>
+              </div>
+            )}
           </div>
 
           <div className="space-y-6">
