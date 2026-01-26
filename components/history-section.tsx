@@ -32,23 +32,7 @@ export default function HistorySection({ title, subtitle, content, image, milest
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="relative">
-            {image && (
-              <Image
-                src={image}
-                alt="تاريخ الاتحاد المصري للتزلج"
-                width={600}
-                height={400}
-                className="rounded-lg shadow-lg"
-              />
-            )}
-            {image && (
-              <div className="absolute -bottom-6 -right-6 bg-red-600 text-white p-4 rounded-lg shadow-lg">
-                <div className="text-2xl font-bold">15+</div>
-                <div className="text-sm">سنة من التميز</div>
-              </div>
-            )}
-          </div>
+
 
           <div className="space-y-6">
             {displayMilestones.map((milestone, index) => (
