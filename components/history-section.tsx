@@ -24,11 +24,8 @@ export default function HistorySection({ title, subtitle, content, image, milest
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">{title || "تاريخنا ومسيرتنا"}</h2>
-          <div className="text-lg text-gray-600 max-w-3xl mx-auto prose">
-            {/* If content is complex block content we might need PortableText, but if simple text: */}
-            <p>{subtitle || "رحلة طويلة من العمل والإنجازات في سبيل تطوير رياضة التزلج في مصر"}</p>
-            {content && typeof content === 'string' && <p className="mt-4">{content}</p>}
-          </div>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto text-center">{subtitle || "رحلة طويلة من العمل والإنجازات في سبيل تطوير رياضة التزلج في مصر"}</p>
+          {content && typeof content === 'string' && <p className="text-lg text-gray-600 max-w-3xl mx-auto text-center mt-4">{content}</p>}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
