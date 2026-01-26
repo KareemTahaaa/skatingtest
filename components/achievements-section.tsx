@@ -49,21 +49,35 @@ export default function AchievementsSection({ data }: AchievementsSectionProps) 
               return (
                 <div
                   key={index}
-                  className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-300"
+                  className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
                 >
-                  <div className="flex items-center mb-4">
-                    <div className="bg-red-50 rounded-full w-12 h-12 flex items-center justify-center mr-3">
-                      <Icon className="h-6 w-6 text-red-600" />
+                  {/* Achievement Image */}
+                  {achievement.image?.asset?.url && (
+                    <div className="relative w-full h-48">
+                      <Image
+                        src={achievement.image.asset.url}
+                        alt={achievement.title || "Achievement"}
+                        fill
+                        className="object-cover"
+                      />
                     </div>
-                    <div>
-                      <span className="bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs font-semibold">
-                        {achievement.type || "عام"}
-                      </span>
-                      <div className="text-gray-500 text-sm mt-1">{achievement.year}</div>
+                  )}
+
+                  <div className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="bg-red-50 rounded-full w-12 h-12 flex items-center justify-center mr-3">
+                        <Icon className="h-6 w-6 text-red-600" />
+                      </div>
+                      <div>
+                        <span className="bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs font-semibold">
+                          {achievement.type || "عام"}
+                        </span>
+                        <div className="text-gray-500 text-sm mt-1">{achievement.year}</div>
+                      </div>
                     </div>
+                    <h3 className="text-lg font-bold text-gray-800 mb-2">{achievement.title}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">{achievement.description}</p>
                   </div>
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">{achievement.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{achievement.description}</p>
                 </div>
               )
             })}
