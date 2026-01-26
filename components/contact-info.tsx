@@ -38,20 +38,8 @@ export default function ContactInfo({ data }: ContactInfoProps) {
       color: "text-green-600",
       bgColor: "bg-green-50",
     },
-    {
-      icon: Globe,
-      title: "الموقع الإلكتروني",
-      details: data?.websiteInfo?.url ? [data.websiteInfo.url] : ["www.ensf.com", "النسخة الإنجليزية متاحة"],
-      color: "text-purple-600",
-      bgColor: "bg-purple-50",
-    },
-    {
-      icon: Clock,
-      title: "ساعات العمل",
-      details: data?.workingHours?.map((w: any) => `${w.days}: ${w.hours}`) || ["الأحد - الخميس: 9:00 ص - 5:00 م", "السبت: 9:00 ص - 2:00 م"],
-      color: "text-orange-600",
-      bgColor: "bg-orange-50",
-    },
+
+
   ]
 
   return (
@@ -81,16 +69,7 @@ export default function ContactInfo({ data }: ContactInfoProps) {
         </CardContent>
       </Card>
 
-      <Card className="bg-red-50 border-red-200">
-        <CardContent className="p-6">
-          <h3 className="font-bold text-red-800 mb-2">استجابة سريعة</h3>
-          <p className="text-red-700 text-sm mb-3">نلتزم بالرد على جميع الاستفسارات خلال 24 ساعة من استلامها</p>
-          <div className="flex items-center text-red-600 text-sm">
-            <Clock className="h-4 w-4 ml-1" />
-            <span>متوسط وقت الاستجابة: 4 ساعات</span>
-          </div>
-        </CardContent>
-      </Card>
+
     </div>
   )
 }

@@ -4,7 +4,6 @@ import ContactForm from "@/components/contact-form"
 import ContactInfo from "@/components/contact-info"
 import ContactMap from "@/components/contact-map"
 import ContactDepartments from "@/components/contact-departments"
-import ContactFAQ from "@/components/contact-faq"
 import { getContactPageData, getSiteSettings } from "@/lib/sanity.queries"
 
 export const revalidate = 60
@@ -71,7 +70,6 @@ export default async function ContactPage() {
 
         <ContactDepartments />
         <ContactMap />
-        <ContactFAQ />
       </div>
     </main>
   )
