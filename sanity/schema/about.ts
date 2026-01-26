@@ -233,19 +233,19 @@ export default defineType({
       type: "object",
       fields: [
         {
-          name: "title",
-          title: "العنوان",
+          name: "achievementsTitle",
+          title: "عنوان قسم الإنجازات",
           type: "string",
         },
         {
-          name: "subtitle",
-          title: "الوصف",
+          name: "achievementsSubtitle",
+          title: "وصف قسم الإنجازات",
           type: "text",
           rows: 3,
         },
         {
-          name: "image",
-          title: "صورة قسم الإنجازات",
+          name: "achievementsImage",
+          title: "صورة قسم الإنجازات الجانبية",
           type: "image",
           options: {
             hotspot: true,

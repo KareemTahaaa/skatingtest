@@ -11,9 +11,9 @@ interface AchievementItem {
 }
 
 interface AchievementsData {
-  title?: string
-  subtitle?: string
-  image?: any
+  achievementsTitle?: string
+  achievementsSubtitle?: string
+  achievementsImage?: any
   items?: AchievementItem[]
 }
 
@@ -25,38 +25,9 @@ interface AchievementsSectionProps {
 // Since schema doesn't have icon picker for achievements yet, we'll cycle or default
 
 export default function AchievementsSection({ data }: AchievementsSectionProps) {
-  const defaultAchievements = [
-    {
-      icon: Award,
-      title: "بطولة العالم للناشئين 2024",
-      description: "المركز الثالث في بطولة العالم للناشئين تحت 18 سنة",
-      year: "2024",
-      type: "دولي",
-    },
-    {
-      icon: Medal,
-      title: "البطولة العربية 2023",
-      description: "المركز الأول في البطولة العربية للتزلج الفني",
-      year: "2023",
-      type: "إقليمي",
-    },
-    {
-      icon: Star,
-      title: "أفضل اتحاد عربي",
-      description: "جائزة أفضل اتحاد عربي لتطوير رياضة التزلج",
-      year: "2023",
-      type: "تقدير",
-    },
-    {
-      icon: Globe,
-      title: "البطولة الأفريقية 2022",
-      description: "المركز الثاني في البطولة الأفريقية للتزلج السريع",
-      year: "2022",
-      type: "قاري",
-    },
-  ]
 
-  const displayItems = data?.items && data.items.length > 0 ? data.items : defaultAchievements
+
+  const displayItems = data?.items && data.items.length > 0 ? data.items : []
 
   // Icon cycling for dynamic items since we didn't add icon field to schema yet
   const icons = [Award, Medal, Star, Globe]
@@ -65,9 +36,9 @@ export default function AchievementsSection({ data }: AchievementsSectionProps) 
     <section className="py-12 md:py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">{data?.title || "إنجازاتنا وجوائزنا"}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">{data?.achievementsTitle || "إنجازاتنا وجوائزنا"}</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            {data?.subtitle || "نفخر بالإنجازات التي حققها رياضيونا على المستوى المحلي والإقليمي والدولي"}
+            {data?.achievementsSubtitle || "نفخر بالإنجازات التي حققها رياضيونا على المستوى المحلي والإقليمي والدولي"}
           </p>
         </div>
 
@@ -99,21 +70,16 @@ export default function AchievementsSection({ data }: AchievementsSectionProps) 
           </div>
 
           <div className="relative">
-            {data?.image?.asset?.url && (
+            {data?.achievementsImage?.asset?.url && (
               <Image
-                src={data.image.asset.url}
-                alt={data.title || "إنجازات الاتحاد المصري للتزلج"}
+                src={data.achievementsImage.asset.url}
+                alt={data.achievementsTitle || "إنجازات الاتحاد المصري للتزلج"}
                 width={600}
                 height={500}
                 className="rounded-lg shadow-lg"
               />
             )}
-            {displayItems.length > 0 && (
-              <div className="absolute top-6 right-6 bg-white p-4 rounded-lg shadow-lg">
-                <div className="text-3xl font-bold text-red-600">{displayItems.length}+</div>
-                <div className="text-sm text-gray-600">جائزة وإنجاز</div>
-              </div>
-            )}
+
           </div>
         </div>
 

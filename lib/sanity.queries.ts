@@ -547,9 +547,9 @@ export async function getAboutPageData() {
           }
         },
         achievements {
-          title,
-          subtitle,
-          image {
+          achievementsTitle,
+          achievementsSubtitle,
+          achievementsImage {
             asset->{
               url
             }
