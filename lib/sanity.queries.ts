@@ -300,6 +300,7 @@ export async function getEventBySlug(slug: string) {
           name,
           slug
         },
+        description,
         body,
         registrationLink
       }`,
@@ -635,7 +636,14 @@ export async function getEventsPageMeta() {
     return await client.fetch(
       `*[_type == "eventsPage"][0] {
         metaTitle,
-        metaDescription
+        metaDescription,
+        heroTitle,
+        heroDescription,
+        backgroundImage {
+          asset-> {
+            url
+          }
+        }
       }`,
     )
   } catch (error) {

@@ -1,7 +1,5 @@
 import { notFound } from "next/navigation"
 import Image from "next/image"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import { getSportDisciplineBySlug, getNewsByDiscipline, getEventsByDiscipline } from "@/lib/sanity.queries"
 import { urlForImage } from "@/lib/sanity.client"
 import DisciplineNews from "@/components/discipline-news"
@@ -22,7 +20,6 @@ export default async function DisciplinePage({ params }: { params: { slug: strin
 
   return (
     <main className="min-h-screen bg-gray-100">
-      <Header />
 
       {/* Hero Section */}
       <section className="relative h-[400px]">
@@ -60,7 +57,6 @@ export default async function DisciplinePage({ params }: { params: { slug: strin
         </div>
       </div>
 
-      <Footer />
     </main>
   )
 }

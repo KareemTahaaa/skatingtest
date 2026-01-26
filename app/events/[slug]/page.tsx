@@ -1,5 +1,3 @@
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import Image from "next/image"
 import Link from "next/link"
 import { MapPin, Eye, Download, FileText } from "lucide-react"
@@ -29,7 +27,6 @@ export default async function EventDetailPage({ params }: { params: { slug: stri
 
   return (
     <main className="min-h-screen bg-gray-100">
-      <Header />
 
       {/* Hero Banner */}
       <div className="relative h-[300px] overflow-hidden">

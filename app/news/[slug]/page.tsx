@@ -1,5 +1,3 @@
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import Image from "next/image"
 import Link from "next/link"
 import { CalendarIcon } from "lucide-react"
@@ -24,14 +22,12 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
   if (!news) {
     return (
       <main className="min-h-screen bg-white">
-        <Header />
         <div className="container mx-auto px-4 py-16 text-center">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">الخبر غير موجود</h1>
           <Link href="/news" className="text-red-600 hover:underline">
             العودة إلى الأخبار
           </Link>
         </div>
-        <Footer />
       </main>
     )
   }
@@ -41,7 +37,6 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
 
   return (
     <main className="min-h-screen bg-white">
-      <Header />
 
       <div id="article-header" className="relative h-[400px] md:h-[500px] overflow-hidden">
         <Image
@@ -146,7 +141,6 @@ export default async function NewsDetailPage({ params }: { params: { slug: strin
         </div>
       </div>
 
-      <Footer />
     </main>
   )
 }

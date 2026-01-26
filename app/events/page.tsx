@@ -26,10 +26,17 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function EventsPage({ searchParams }: { searchParams?: { discipline?: string } }) {
   let events = []
   let sportDisciplines = []
+  let eventsPageMeta = null
 
   try {
-    events = await getAllEvents()
-    sportDisciplines = await getAllSportDisciplines()
+    const results = await Promise.all([
+      getAllEvents(),
+      getAllSportDisciplines(),
+      getEventsPageMeta()
+    ])
+    events = results[0]
+    sportDisciplines = results[1]
+    eventsPageMeta = results[2]
   } catch (error) {
     console.error("Error fetching data:", error)
   }
@@ -43,7 +50,7 @@ export default async function EventsPage({ searchParams }: { searchParams?: { di
     )
   }
 
-  let currentDisciplineName = "الفعاليات"
+  let currentDisciplineName = eventsPageMeta?.heroTitle || "الفعاليات"
   if (disciplineFilter && disciplineFilter !== "all") {
     const discipline = sportDisciplines.find((d: any) => d.slug?.current === disciplineFilter)
     if (discipline) {
@@ -53,7 +60,11 @@ export default async function EventsPage({ searchParams }: { searchParams?: { di
 
   return (
     <main className="min-h-screen bg-gray-100">
-      <EventsHero title={currentDisciplineName} />
+      <EventsHero
+        title={currentDisciplineName}
+        description={eventsPageMeta?.heroDescription}
+        image={eventsPageMeta?.backgroundImage?.asset?.url}
+      />
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-2 space-x-reverse">
