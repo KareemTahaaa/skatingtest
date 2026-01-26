@@ -8,7 +8,9 @@ interface Milestone {
 
 interface HistorySectionProps {
   title?: string
-  content?: string // blockContent in schema but simplistically treated as text here or we can use portable text if complex
+  subtitle?: string
+  content?: string
+  image?: string
   milestones?: Milestone[]
 }
 
@@ -68,10 +70,7 @@ export default function HistorySection({ title, content, milestones }: HistorySe
               height={400}
               className="rounded-lg shadow-lg"
             />
-            <div className="absolute -bottom-6 -right-6 bg-red-600 text-white p-4 rounded-lg shadow-lg">
-              <div className="text-2xl font-bold">15+</div>
-              <div className="text-sm">سنة من التميز</div>
-            </div>
+
           </div>
 
           <div className="space-y-6">

@@ -40,14 +40,22 @@ export default async function AboutPage() {
         image={aboutData?.backgroundImage?.asset?.url}
       />
       <MissionSection
+        title={aboutData?.missionSectionTitle}
+        subtitle={aboutData?.missionSectionSubtitle}
         mission={{ title: aboutData?.missionTitle, content: aboutData?.missionContent }}
         vision={{ title: aboutData?.visionTitle, content: aboutData?.visionContent }}
         values={{ title: aboutData?.valuesTitle, content: aboutData?.valuesContent }}
       />
-      <StatsSection stats={aboutData?.stats} />
+      <StatsSection
+        title={aboutData?.statsTitle}
+        subtitle={aboutData?.statsSubtitle}
+        stats={aboutData?.stats}
+      />
       <HistorySection
         title={aboutData?.historyTitle}
+        subtitle={aboutData?.historySubtitle}
         content={aboutData?.historyContent}
+        image={aboutData?.historyImage?.asset?.url}
         milestones={aboutData?.milestones}
       />
       <LeadershipSection data={aboutData?.leadership} />

@@ -501,6 +501,8 @@ export async function getAboutPageData() {
             url
           }
         },
+        missionSectionTitle,
+        missionSectionSubtitle,
         missionTitle,
         missionContent,
         visionTitle,
@@ -508,12 +510,20 @@ export async function getAboutPageData() {
         valuesTitle,
         valuesContent,
         historyTitle,
+        historySubtitle,
         historyContent,
+        historyImage {
+          asset->{
+            url
+          }
+        },
         milestones[] {
             year,
             title,
             description
         },
+        statsTitle,
+        statsSubtitle,
         stats[] {
             label,
             value,
@@ -522,6 +532,7 @@ export async function getAboutPageData() {
         },
         leadership {
           title,
+          subtitle,
           members[] {
             name,
             position,
@@ -537,6 +548,12 @@ export async function getAboutPageData() {
         },
         achievements {
           title,
+          subtitle,
+          image {
+            asset->{
+              url
+            }
+          },
           items[] {
             title,
             description,

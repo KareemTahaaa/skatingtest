@@ -38,6 +38,17 @@ export default defineType({
       },
     }),
     defineField({
+      name: "missionSectionTitle",
+      title: "عنوان قسم الرسالة والرؤية",
+      type: "string",
+    }),
+    defineField({
+      name: "missionSectionSubtitle",
+      title: "وصف قسم الرسالة والرؤية",
+      type: "text",
+      rows: 3,
+    }),
+    defineField({
       name: "missionTitle",
       title: "عنوان المهمة",
       type: "string",
@@ -76,9 +87,23 @@ export default defineType({
       type: "string",
     }),
     defineField({
+      name: "historySubtitle",
+      title: "وصف التاريخ",
+      type: "text",
+      rows: 3,
+    }),
+    defineField({
       name: "historyContent",
-      title: "محتوى التاريخ",
+      title: "محتوى التاريخ (تفاصيل إضافية)",
       type: "blockContent",
+    }),
+    defineField({
+      name: "historyImage",
+      title: "صورة قسم التاريخ",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
       name: "milestones",
@@ -96,8 +121,19 @@ export default defineType({
       ],
     }),
     defineField({
+      name: "statsTitle",
+      title: "عنوان الإحصائيات",
+      type: "string",
+    }),
+    defineField({
+      name: "statsSubtitle",
+      title: "وصف الإحصائيات",
+      type: "text",
+      rows: 3,
+    }),
+    defineField({
       name: "stats",
-      title: "قسم الإحصائيات",
+      title: "أرقام الإحصائيات",
       type: "array",
       of: [
         {
@@ -137,6 +173,12 @@ export default defineType({
           name: "title",
           title: "العنوان",
           type: "string",
+        },
+        {
+          name: "subtitle",
+          title: "الوصف",
+          type: "text",
+          rows: 3,
         },
         {
           name: "members",
@@ -194,6 +236,20 @@ export default defineType({
           name: "title",
           title: "العنوان",
           type: "string",
+        },
+        {
+          name: "subtitle",
+          title: "الوصف",
+          type: "text",
+          rows: 3,
+        },
+        {
+          name: "image",
+          title: "صورة قسم الإنجازات",
+          type: "image",
+          options: {
+            hotspot: true,
+          },
         },
         {
           name: "items",

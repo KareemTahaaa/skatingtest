@@ -12,6 +12,8 @@ interface AchievementItem {
 
 interface AchievementsData {
   title?: string
+  subtitle?: string
+  image?: any
   items?: AchievementItem[]
 }
 
@@ -65,7 +67,7 @@ export default function AchievementsSection({ data }: AchievementsSectionProps) 
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">{data?.title || "إنجازاتنا وجوائزنا"}</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            نفخر بالإنجازات التي حققها رياضيونا على المستوى المحلي والإقليمي والدولي
+            {data?.subtitle || "نفخر بالإنجازات التي حققها رياضيونا على المستوى المحلي والإقليمي والدولي"}
           </p>
         </div>
 
@@ -97,17 +99,21 @@ export default function AchievementsSection({ data }: AchievementsSectionProps) 
           </div>
 
           <div className="relative">
-            <Image
-              src="/placeholder.svg?height=500&width=600&text=إنجازات+الاتحاد+المصري+للتزلج"
-              alt="إنجازات الاتحاد المصري للتزلج"
-              width={600}
-              height={500}
-              className="rounded-lg shadow-lg"
-            />
-            <div className="absolute top-6 right-6 bg-white p-4 rounded-lg shadow-lg">
-              <div className="text-3xl font-bold text-red-600">{displayItems.length}+</div>
-              <div className="text-sm text-gray-600">جائزة وإنجاز</div>
-            </div>
+            {data?.image?.asset?.url && (
+              <Image
+                src={data.image.asset.url}
+                alt={data.title || "إنجازات الاتحاد المصري للتزلج"}
+                width={600}
+                height={500}
+                className="rounded-lg shadow-lg"
+              />
+            )}
+            {displayItems.length > 0 && (
+              <div className="absolute top-6 right-6 bg-white p-4 rounded-lg shadow-lg">
+                <div className="text-3xl font-bold text-red-600">{displayItems.length}+</div>
+                <div className="text-sm text-gray-600">جائزة وإنجاز</div>
+              </div>
+            )}
           </div>
         </div>
 

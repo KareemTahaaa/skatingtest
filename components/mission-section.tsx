@@ -6,19 +6,21 @@ interface SectionData {
 }
 
 interface MissionSectionProps {
+  title?: string
+  subtitle?: string
   mission?: SectionData
   vision?: SectionData
   values?: SectionData
 }
 
-export default function MissionSection({ mission, vision, values }: MissionSectionProps) {
+export default function MissionSection({ title, subtitle, mission, vision, values }: MissionSectionProps) {
   return (
     <section className="py-12 md:py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">رسالتنا ورؤيتنا</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">{title || "رسالتنا ورؤيتنا"}</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            نسعى لتطوير رياضة التزلج في مصر وإعداد جيل من الأبطال القادرين على المنافسة عالمياً
+            {subtitle || "نسعى لتطوير رياضة التزلج في مصر وإعداد جيل من الأبطال القادرين على المنافسة عالمياً"}
           </p>
         </div>
 

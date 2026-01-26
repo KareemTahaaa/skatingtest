@@ -12,6 +12,7 @@ interface Member {
 
 interface LeadershipData {
   title?: string
+  subtitle?: string
   members?: Member[]
 }
 
@@ -20,42 +21,8 @@ interface LeadershipSectionProps {
 }
 
 export default function LeadershipSection({ data }: LeadershipSectionProps) {
-  const defaultLeaders = [
-    {
-      name: "د. أحمد محمد علي",
-      position: "رئيس الاتحاد",
-      image: { asset: { url: "/placeholder.svg?height=300&width=300&text=رئيس+الاتحاد" } },
-      bio: "خبرة تزيد عن 20 عاماً في إدارة الاتحادات الرياضية وتطوير الرياضات الفردية",
-      email: "president@ensf.com",
-      phone: "+20 100 123 4567",
-    },
-    {
-      name: "أ. سارة إبراهيم",
-      position: "نائب رئيس الاتحاد",
-      image: { asset: { url: "/placeholder.svg?height=300&width=300&text=نائب+الرئيس" } },
-      bio: "متخصصة في تطوير برامج التدريب والأكاديميات الرياضية للناشئين",
-      email: "vp@ensf.com",
-      phone: "+20 100 123 4568",
-    },
-    {
-      name: "كابتن محمد حسن",
-      position: "المدير الفني",
-      image: { asset: { url: "/placeholder.svg?height=300&width=300&text=المدير+الفني" } },
-      bio: "بطل سابق في التزلج ومدرب معتمد دولياً مع خبرة 15 عاماً في التدريب",
-      email: "technical@ensf.com",
-      phone: "+20 100 123 4569",
-    },
-    {
-      name: "أ. فاطمة أحمد",
-      position: "أمين الصندوق",
-      image: { asset: { url: "/placeholder.svg?height=300&width=300&text=أمين+الصندوق" } },
-      bio: "خبيرة في الإدارة المالية والتخطيط الاستراتيجي للمؤسسات الرياضية",
-      email: "treasurer@ensf.com",
-      phone: "+20 100 123 4570",
-    },
-  ]
 
-  const displayLeaders = data?.members && data.members.length > 0 ? data.members : defaultLeaders
+  const displayLeaders = data?.members && data.members.length > 0 ? data.members : [];
 
   return (
     <section className="py-12 md:py-16 bg-white">
@@ -63,7 +30,7 @@ export default function LeadershipSection({ data }: LeadershipSectionProps) {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">{data?.title || "قيادة الاتحاد"}</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            فريق من الخبراء والمتخصصين يقود الاتحاد نحو تحقيق أهدافه وطموحاته
+            {data?.subtitle || "فريق من الخبراء والمتخصصين يقود الاتحاد نحو تحقيق أهدافه وطموحاته"}
           </p>
         </div>
 

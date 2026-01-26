@@ -8,6 +8,8 @@ interface StatItem {
 }
 
 interface StatsSectionProps {
+  title?: string
+  subtitle?: string
   stats?: StatItem[]
 }
 
@@ -21,7 +23,7 @@ const iconMap: Record<string, any> = {
   Star
 }
 
-export default function StatsSection({ stats }: StatsSectionProps) {
+export default function StatsSection({ title, subtitle, stats }: StatsSectionProps) {
   const defaultStats = [
     {
       icon: "Users",
@@ -55,8 +57,8 @@ export default function StatsSection({ stats }: StatsSectionProps) {
     <section className="py-12 md:py-16 bg-red-600">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">إنجازاتنا بالأرقام</h2>
-          <p className="text-xl text-red-100">نفخر بما حققناه خلال مسيرتنا في تطوير رياضة التزلج</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">{title || "إنجازاتنا بالأرقام"}</h2>
+          <p className="text-xl text-red-100">{subtitle || "نفخر بما حققناه خلال مسيرتنا في تطوير رياضة التزلج"}</p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
