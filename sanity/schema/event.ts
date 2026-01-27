@@ -58,6 +58,13 @@ export default defineType({
       to: { type: "sportDiscipline" },
     }),
     defineField({
+      name: "descriptionHeading",
+      title: "عنوان قسم الوصف",
+      type: "string",
+      description: "العنوان الذي يظهر فوق الوصف التفصيلي (مثل: استعدوا للإثارة والتشويق!)",
+      initialValue: "استعدوا للإثارة والتشويق!",
+    }),
+    defineField({
       name: "description",
       title: "الوصف التفصيلي (لصفحة الفعالية)",
       type: "blockContent",

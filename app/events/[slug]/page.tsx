@@ -170,7 +170,9 @@ export default async function EventDetailPage({ params }: { params: { slug: stri
                 </div>
 
                 <div className="mb-8">
-                  <h3 className="text-xl font-bold text-red-600 mb-4">استعدوا للإثارة والتشويق!</h3>
+                  <h3 className="text-xl font-bold text-red-600 mb-4">
+                    {event.descriptionHeading || "استعدوا للإثارة والتشويق!"}
+                  </h3>
                   {event.description ? (
                     <div className="prose prose-lg max-w-none">
                       <PortableText value={event.description} components={portableTextComponents} />

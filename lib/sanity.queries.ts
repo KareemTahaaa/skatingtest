@@ -300,6 +300,7 @@ export async function getEventBySlug(slug: string) {
           name,
           slug
         },
+        descriptionHeading,
         description,
         body,
         registrationLink
