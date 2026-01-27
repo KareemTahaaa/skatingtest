@@ -31,11 +31,13 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   let news = []
   let events = []
+  let siteSettings = null
 
   try {
-    const [newsData, eventsData] = await Promise.all([getAllNews(), getAllEvents()])
+    const [newsData, eventsData, settingsData] = await Promise.all([getAllNews(), getAllEvents(), getSiteSettings()])
     news = newsData
     events = eventsData
+    siteSettings = settingsData
   } catch (error) {
     console.error("Error fetching data:", error)
   }
@@ -68,7 +70,7 @@ export default async function Home() {
       {/* Events Section - Now positioned after News */}
       <UpcomingEvents events={upcomingEvents} />
 
-      <ContactSection />
+      <ContactSection contactInfo={siteSettings?.contactInfo} />
     </main>
   )
 }

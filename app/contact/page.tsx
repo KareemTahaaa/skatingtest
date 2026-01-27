@@ -4,7 +4,7 @@ import ContactForm from "@/components/contact-form"
 import ContactInfo from "@/components/contact-info"
 import { getContactPageData, getSiteSettings } from "@/lib/sanity.queries"
 
-export const revalidate = 60
+export const revalidate = 0
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
