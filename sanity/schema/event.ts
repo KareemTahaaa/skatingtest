@@ -58,9 +58,15 @@ export default defineType({
       to: { type: "sportDiscipline" },
     }),
     defineField({
-      name: "body",
-      title: "المحتوى",
+      name: "description",
+      title: "الوصف التفصيلي (لصفحة الفعالية)",
       type: "blockContent",
+    }),
+    defineField({
+      name: "body",
+      title: "المحتوى (قديم - سيتم استبداله بالوصف)",
+      type: "blockContent",
+      hidden: true,
     }),
     defineField({
       name: "registrationLink",

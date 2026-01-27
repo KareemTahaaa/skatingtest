@@ -1,5 +1,5 @@
 import Header from "@/components/header"
-import SiteFooter from "@/components/footer"
+import Footer from "@/components/footer"
 import Image from "next/image"
 import Link from "next/link"
 import { MapPin } from "lucide-react"
@@ -305,7 +305,7 @@ export default async function EventDetailPage({ params }: { params: { slug: stri
         </div>
       </div>
 
-      <SiteFooter />
+      <Footer />
     </main>
   )
 }

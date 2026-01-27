@@ -300,6 +300,7 @@ export async function getEventBySlug(slug: string) {
           name,
           slug
         },
+        description,
         body,
         registrationLink
       }`,
@@ -409,6 +410,14 @@ export async function getSiteSettings() {
       `*[_type == "siteSettings"][0] {
         siteName,
         siteDescription,
+        contactInfo {
+          address,
+          phone,
+          email,
+          workingHours,
+          whatsapp,
+          websiteInfo
+        },
         logo {
           asset->{
             _id,
@@ -439,6 +448,24 @@ export async function getSiteSettings() {
   }
 }
 
+// Social Media Links
+export async function getSocialMediaLinks() {
+  try {
+    const links = await client.fetch(
+      `*[_type == "socialMediaLinks"][0] {
+        facebook,
+        instagram,
+        twitter,
+        linkedin
+      }`,
+    )
+    return links || {}
+  } catch (error) {
+    console.error("Error fetching social media links:", error)
+    return {}
+  }
+}
+
 // Page Metadata
 export async function getHomePageMeta() {
   if (useMockData()) {
@@ -458,7 +485,7 @@ export async function getHomePageMeta() {
   }
 }
 
-export async function getAboutPageMeta() {
+export async function getAboutPageData() {
   if (useMockData()) {
     return null
   }
@@ -467,7 +494,79 @@ export async function getAboutPageMeta() {
     return await client.fetch(
       `*[_type == "about"][0] {
         metaTitle,
-        metaDescription
+        metaDescription,
+        heroTitle,
+        heroDescription,
+        backgroundImage {
+          asset->{
+            url
+          }
+        },
+        missionSectionTitle,
+        missionSectionSubtitle,
+        missionTitle,
+        missionContent,
+        visionTitle,
+        visionContent,
+        valuesTitle,
+        valuesContent,
+        historyTitle,
+        historySubtitle,
+        historyContent,
+        historyImage {
+          asset->{
+            url
+          }
+        },
+        milestones[] {
+            year,
+            title,
+            description
+        },
+        statsTitle,
+        statsSubtitle,
+        stats[] {
+            label,
+            value,
+            icon,
+            description
+        },
+        leadership {
+          title,
+          subtitle,
+          members[] {
+            name,
+            position,
+            bio,
+            email,
+            phone,
+            image {
+              asset->{
+                url
+              }
+            }
+          }
+        },
+        achievements {
+          achievementsTitle,
+          achievementsSubtitle,
+          achievementsImage {
+            asset->{
+              url
+            }
+          },
+          items[] {
+            title,
+            description,
+            year,
+            type,
+            image {
+              asset->{
+                url
+              }
+            }
+          }
+        }
       }`,
     )
   } catch (error) {
@@ -476,7 +575,7 @@ export async function getAboutPageMeta() {
   }
 }
 
-export async function getContactPageMeta() {
+export async function getContactPageData() {
   if (useMockData()) {
     return null
   }
@@ -485,11 +584,20 @@ export async function getContactPageMeta() {
     return await client.fetch(
       `*[_type == "contact"][0] {
         metaTitle,
-        metaDescription
+        metaDescription,
+        hero {
+          title,
+          subtitle,
+          backgroundImage {
+            asset-> {
+              url
+            }
+          }
+        }
       }`,
     )
   } catch (error) {
-    console.error("Error fetching contact page metadata:", error)
+    console.error("Error fetching contact page data:", error)
     return null
   }
 }
@@ -503,7 +611,14 @@ export async function getNewsPageMeta() {
     return await client.fetch(
       `*[_type == "newsPage"][0] {
         metaTitle,
-        metaDescription
+        metaDescription,
+        heroTitle,
+        heroDescription,
+        backgroundImage {
+          asset-> {
+            url
+          }
+        }
       }`,
     )
   } catch (error) {
@@ -521,7 +636,14 @@ export async function getEventsPageMeta() {
     return await client.fetch(
       `*[_type == "eventsPage"][0] {
         metaTitle,
-        metaDescription
+        metaDescription,
+        heroTitle,
+        heroDescription,
+        backgroundImage {
+          asset-> {
+            url
+          }
+        }
       }`,
     )
   } catch (error) {
@@ -533,14 +655,22 @@ export async function getEventsPageMeta() {
 export async function getRegulations() {
   try {
     const regulations = await client.fetch(
-      `*[_type == "regulations"][0] {
+      `*[_type == "regulations"] | order(_updatedAt desc)[0] {
         hero,
         tableOfContents,
         generalRegulations,
         disciplineRegulations,
         antiDopingRegulations,
         upcomingAmendments,
-        documents,
+        documents[] {
+          title,
+          file {
+            asset-> {
+              url,
+              size
+            }
+          }
+        },
         contacts
       }`,
     )
@@ -591,3 +721,29 @@ export async function getResults() {
   }
 }
 
+// Get results for a specific event
+export async function getResultsByEvent(eventId: string) {
+  try {
+    const results = await client.fetch(
+      `*[_type == "result" && event._ref == $eventId] | order(publishedAt desc) {
+        _id,
+        title,
+        description,
+        category,
+        file {
+          asset-> {
+            url,
+            originalFilename,
+            size
+          }
+        },
+        publishedAt
+      }`,
+      { eventId }
+    )
+    return results || []
+  } catch (error) {
+    console.error("Error fetching results by event:", error)
+    return []
+  }
+}

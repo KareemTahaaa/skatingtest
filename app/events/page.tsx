@@ -1,6 +1,4 @@
 import type { Metadata } from "next"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
 import EventsHero from "@/components/events-hero"
 import EventsContent from "@/components/events-content"
 import { getAllEvents, getAllSportDisciplines, getEventsPageMeta, getSiteSettings } from "@/lib/sanity.queries"
@@ -28,10 +26,17 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function EventsPage({ searchParams }: { searchParams?: { discipline?: string } }) {
   let events = []
   let sportDisciplines = []
+  let eventsPageMeta = null
 
   try {
-    events = await getAllEvents()
-    sportDisciplines = await getAllSportDisciplines()
+    const results = await Promise.all([
+      getAllEvents(),
+      getAllSportDisciplines(),
+      getEventsPageMeta()
+    ])
+    events = results[0]
+    sportDisciplines = results[1]
+    eventsPageMeta = results[2]
   } catch (error) {
     console.error("Error fetching data:", error)
   }
@@ -40,23 +45,26 @@ export default async function EventsPage({ searchParams }: { searchParams?: { di
   let filteredEvents = events
 
   if (disciplineFilter && disciplineFilter !== "all") {
-    filteredEvents = events.filter((item) =>
-      item.sportDisciplines?.some((d: any) => d.slug?.current === disciplineFilter),
+    filteredEvents = events.filter((item: any) =>
+      item.discipline?.slug?.current === disciplineFilter
     )
   }
 
-  let currentDisciplineName = "الفعاليات"
+  let currentDisciplineName = eventsPageMeta?.heroTitle || "الفعاليات"
   if (disciplineFilter && disciplineFilter !== "all") {
-    const discipline = sportDisciplines.find((d) => d.slug?.current === disciplineFilter)
+    const discipline = sportDisciplines.find((d: any) => d.slug?.current === disciplineFilter)
     if (discipline) {
-      currentDisciplineName = `فعاليات ${discipline.title}`
+      currentDisciplineName = `فعاليات ${discipline.name}`
     }
   }
 
   return (
     <main className="min-h-screen bg-gray-100">
-      <Header />
-      <EventsHero title={currentDisciplineName} />
+      <EventsHero
+        title={currentDisciplineName}
+        description={eventsPageMeta?.heroDescription}
+        image={eventsPageMeta?.backgroundImage?.asset?.url}
+      />
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-2 space-x-reverse">
@@ -87,7 +95,6 @@ export default async function EventsPage({ searchParams }: { searchParams?: { di
           <EventsContent initialEvents={filteredEvents} sportDisciplines={sportDisciplines} />
         </Suspense>
       </div>
-      <Footer />
     </main>
   )
 }
