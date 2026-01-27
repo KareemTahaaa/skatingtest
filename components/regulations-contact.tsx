@@ -12,10 +12,14 @@ interface Contact {
 }
 
 interface RegulationsContactProps {
-  contacts?: Contact[]
+  data?: {
+    title?: string
+    description?: string
+    items: Contact[]
+  }
 }
 
-const defaultContacts = [
+const defaultContacts: Contact[] = [
   {
     icon: "FileQuestion",
     title: "الاستفسارات العامة",
@@ -52,14 +56,16 @@ const iconMap: { [key: string]: any } = {
   Scale,
 }
 
-export default function RegulationsContact({ contacts }: RegulationsContactProps) {
-  const contactList = contacts || defaultContacts
+export default function RegulationsContact({ data }: RegulationsContactProps) {
+  const contactList = data?.items || defaultContacts
 
   return (
     <section id="contact" className="scroll-mt-24">
       <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">للتواصل والاستفسارات</h2>
-        <p className="text-lg text-gray-600">فريقنا مستعد للإجابة على جميع استفساراتكم حول اللوائح والقوانين</p>
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">{data?.title || "للتواصل والاستفسارات"}</h2>
+        <p className="text-lg text-gray-600">
+          {data?.description || "فريقنا مستعد للإجابة على جميع استفساراتكم حول اللوائح والقوانين"}
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

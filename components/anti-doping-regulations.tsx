@@ -18,6 +18,8 @@ interface ImportantNotice {
 
 interface AntiDopingRegulationsProps {
   data?: {
+    title?: string
+    description?: string
     sections: AntiDopingSection[]
     importantNotice: ImportantNotice
   }
@@ -106,8 +108,10 @@ export default function AntiDopingRegulations({ data }: AntiDopingRegulationsPro
   return (
     <section id="anti-doping" className="scroll-mt-24">
       <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">لوائح مكافحة المنشطات</h2>
-        <p className="text-lg text-gray-600">قوانين صارمة لضمان النزاهة والعدالة في المنافسات الرياضية</p>
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">{data?.title || "لوائح مكافحة المنشطات"}</h2>
+        <p className="text-lg text-gray-600">
+          {data?.description || "قوانين صارمة لضمان النزاهة والعدالة في المنافسات الرياضية"}
+        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

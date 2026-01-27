@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Download, FileText, Calendar } from "lucide-react"
+import { Download, FileText } from "lucide-react"
 
 interface Document {
   title: string
@@ -13,19 +13,25 @@ interface Document {
 }
 
 interface RegulationsDownloadProps {
-  documents?: Document[]
+  data?: {
+    title?: string
+    description?: string
+    noteTitle?: string
+    noteContent?: string
+    documents: Document[]
+  }
 }
 
 const defaultDocuments: Document[] = []
 
-export default function RegulationsDownload({ documents }: RegulationsDownloadProps) {
-  const docs = documents || defaultDocuments
+export default function RegulationsDownload({ data }: RegulationsDownloadProps) {
+  const docs = data?.documents || defaultDocuments
 
   return (
     <section id="downloads" className="scroll-mt-24">
       <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">تحميل المستندات</h2>
-        <p className="text-lg text-gray-600">النسخ الكاملة من اللوائح والقوانين بصيغة PDF</p>
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">{data?.title || "تحميل المستندات"}</h2>
+        <p className="text-lg text-gray-600">{data?.description || "النسخ الكاملة من اللوائح والقوانين بصيغة PDF"}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -62,15 +68,15 @@ export default function RegulationsDownload({ documents }: RegulationsDownloadPr
           <div className="flex items-start">
             <FileText className="h-6 w-6 text-blue-600 ml-4 mt-1 flex-shrink-0" />
             <div>
-              <h3 className="font-bold text-blue-800 mb-2">ملاحظة هامة</h3>
+              <h3 className="font-bold text-blue-800 mb-2">{data?.noteTitle || "ملاحظة هامة"}</h3>
               <p className="text-blue-700 leading-relaxed">
-                جميع المستندات المتوفرة للتحميل هي النسخ الرسمية المعتمدة من الاتحاد المصري للتزلج. في حالة وجود أي
-                تعارض بين النسخة الإلكترونية والنسخة المطبوعة، تُعتبر النسخة المطبوعة المودعة لدى الاتحاد هي المرجع.
+                {data?.noteContent ||
+                  "جميع المستندات المتوفرة للتحميل هي النسخ الرسمية المعتمدة من الاتحاد المصري للتزلج. في حالة وجود أي تعارض بين النسخة الإلكترونية والنسخة المطبوعة، تُعتبر النسخة المطبوعة المودعة لدى الاتحاد هي المرجع."}
               </p>
             </div>
           </div>
         </CardContent>
       </Card>
-    </section >
+    </section>
   )
 }

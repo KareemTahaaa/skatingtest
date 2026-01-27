@@ -663,16 +663,34 @@ export async function getRegulations() {
         disciplineRegulations,
         antiDopingRegulations,
         upcomingAmendments,
-        documents[] {
+        downloadsSection {
           title,
-          file {
-            asset-> {
-              url,
-              size
+          description,
+          noteTitle,
+          noteContent,
+          documents[] {
+            title,
+            file {
+              asset-> {
+                url,
+                size
+              }
             }
           }
         },
-        contacts
+        contactsSection {
+          title,
+          description,
+          items[] {
+            title,
+            description,
+            email,
+            phone,
+            icon,
+            color,
+            bgColor
+          }
+        }
       }`,
     )
     return regulations || mockRegulations

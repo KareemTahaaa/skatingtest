@@ -65,8 +65,8 @@ export default async function RegulationsPage() {
             <DisciplineRegulations data={regulations?.disciplineRegulations} />
             <AntiDopingRegulations data={regulations?.antiDopingRegulations} />
             <UpcomingAmendments data={regulations?.upcomingAmendments} />
-            <RegulationsDownload documents={regulations?.documents} />
-            <RegulationsContact contacts={regulations?.contacts} />
+            <RegulationsDownload data={regulations?.downloadsSection} />
+            <RegulationsContact data={regulations?.contactsSection} />
           </div>
         </div>
       </div>

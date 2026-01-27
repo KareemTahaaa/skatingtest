@@ -18,6 +18,10 @@ interface TimelineQuarter {
 
 interface UpcomingAmendmentsProps {
   data?: {
+    title?: string
+    description?: string
+    timelineTitle?: string
+    notificationTitle?: string
     amendments: Amendment[]
     timelineSummary?: {
       quarters: TimelineQuarter[]
@@ -83,8 +87,10 @@ export default function UpcomingAmendments({ data }: UpcomingAmendmentsProps) {
   return (
     <section id="upcoming-amendments" className="scroll-mt-24">
       <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">التعديلات والتحديثات القادمة</h2>
-        <p className="text-lg text-gray-600">التعديلات المقترحة والمتوقعة على اللوائح خلال الفترة القادمة</p>
+        <h2 className="text-3xl font-bold text-gray-800 mb-4">{data?.title || "التعديلات والتحديثات القادمة"}</h2>
+        <p className="text-lg text-gray-600">
+          {data?.description || "التعديلات المقترحة والمتوقعة على اللوائح خلال الفترة القادمة"}
+        </p>
       </div>
 
       {/* Timeline Summary */}
@@ -92,7 +98,7 @@ export default function UpcomingAmendments({ data }: UpcomingAmendmentsProps) {
         <CardHeader>
           <CardTitle className="flex items-center">
             <Calendar className="h-6 w-6 text-red-600 ml-2" />
-            الجدول الزمني للتعديلات
+            {data?.timelineTitle || "الجدول الزمني للتعديلات"}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -150,7 +156,7 @@ export default function UpcomingAmendments({ data }: UpcomingAmendmentsProps) {
           <div className="flex items-start">
             <AlertCircle className="h-6 w-6 text-orange-600 ml-4 mt-1 flex-shrink-0" />
             <div>
-              <h3 className="font-bold text-orange-800 mb-2">إشعار هام</h3>
+              <h3 className="font-bold text-orange-800 mb-2">{data?.notificationTitle || "إشعار هام"}</h3>
               <p className="text-orange-700 leading-relaxed">{notificationText}</p>
             </div>
           </div>

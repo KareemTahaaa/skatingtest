@@ -12,6 +12,10 @@ interface GeneralRegulationsProps {
     title: string
     description: string
     regulations: Regulation[]
+    importantNotice?: {
+      title: string
+      content: string
+    }
   }
 }
 
@@ -114,11 +118,11 @@ export default function GeneralRegulations({ data }: GeneralRegulationsProps) {
         <CardContent className="p-6">
           <h3 className="font-bold text-blue-800 mb-3 flex items-center">
             <span className="text-2xl ml-2">ℹ️</span>
-            ملاحظة مهمة
+            {data?.importantNotice?.title || "ملاحظة مهمة"}
           </h3>
           <p className="text-blue-700 leading-relaxed">
-            جميع اللوائح المذكورة أعلاه تخضع للتحديث المستمر وفقاً لقرارات الاتحاد الدولي للتزلج. يُنصح بمراجعة النسخة
-            الأحدث من اللوائح قبل المشاركة في أي فعالية رسمية.
+            {data?.importantNotice?.content ||
+              "جميع اللوائح المذكورة أعلاه تخضع للتحديث المستمر وفقاً لقرارات الاتحاد الدولي للتزلج. يُنصح بمراجعة النسخة الأحدث من اللوائح قبل المشاركة في أي فعالية رسمية."}
           </p>
         </CardContent>
       </Card>

@@ -62,6 +62,15 @@ export default defineType({
             },
           ],
         }),
+        defineField({
+          name: "importantNotice",
+          title: "ملاحظة مهمة (أسفل القسم)",
+          type: "object",
+          fields: [
+            defineField({ name: "title", title: "عنوان الملاحظة", type: "string", initialValue: "ملاحظة مهمة" }),
+            defineField({ name: "content", title: "محتوى الملاحظة", type: "text" }),
+          ]
+        }),
       ],
     }),
 
@@ -119,6 +128,8 @@ export default defineType({
       type: "object",
       options: { collapsible: true, collapsed: true },
       fields: [
+        defineField({ name: "title", title: "عنوان القسم", type: "string", initialValue: "لوائح مكافحة المنشطات" }),
+        defineField({ name: "description", title: "وصف القسم", type: "text" }),
         defineField({
           name: "sections",
           title: "الأقسام",
@@ -157,6 +168,11 @@ export default defineType({
       type: "object",
       options: { collapsible: true, collapsed: true },
       fields: [
+        defineField({ name: "title", title: "عنوان القسم", type: "string", initialValue: "التعديلات والتحديثات القادمة" }),
+        defineField({ name: "description", title: "وصف القسم", type: "text" }),
+        defineField({ name: "timelineTitle", title: "عنوان الجدول الزمني", type: "string", initialValue: "الجدول الزمني للتعديلات" }),
+        defineField({ name: "notificationTitle", title: "عنوان الإشعار", type: "string", initialValue: "إشعار هام" }),
+        defineField({ name: "notificationText", title: "نص الإشعار", type: "text" }),
         defineField({
           name: "amendments",
           title: "قائمة التعديلات",
@@ -178,61 +194,82 @@ export default defineType({
       ],
     }),
 
-    // --- Documents ---
+    // --- Documents (Renamed to downloadsSection for object structure) ---
     defineField({
-      name: "documents",
-      title: "ملفات التحميل",
-      type: "array",
-      of: [
-        {
-          type: "object",
-          title: "ملف",
-          fields: [
-            defineField({
-              name: "title",
-              title: "العنوان",
-              type: "string",
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: "file",
-              title: "الملف (PDF)",
-              type: "file",
-              options: {
-                accept: ".pdf",
+      name: "downloadsSection",
+      title: "قسم التحميلات",
+      type: "object",
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: "title", title: "عنوان القسم", type: "string", initialValue: "تحميل المستندات" }),
+        defineField({ name: "description", title: "وصف القسم", type: "text" }),
+        defineField({ name: "noteTitle", title: "عنوان الملاحظة", type: "string", initialValue: "ملاحظة هامة" }),
+        defineField({ name: "noteContent", title: "محتوى الملاحظة", type: "text" }),
+        defineField({
+          name: "documents",
+          title: "ملفات التحميل",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              title: "ملف",
+              fields: [
+                defineField({
+                  name: "title",
+                  title: "العنوان",
+                  type: "string",
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: "file",
+                  title: "الملف (PDF)",
+                  type: "file",
+                  options: {
+                    accept: ".pdf",
+                  },
+                  validation: (Rule) => Rule.required(),
+                }),
+              ],
+              preview: {
+                select: {
+                  title: "title",
+                },
               },
-              validation: (Rule) => Rule.required(),
-            }),
-          ],
-          preview: {
-            select: {
-              title: "title",
             },
-          },
-        },
-      ],
+          ],
+        }),
+      ]
     }),
 
-    // --- Contacts ---
+    // --- Contacts (Renamed to contactsSection) ---
     defineField({
-      name: "contacts",
-      title: "بيانات التواصل",
-      type: "array",
+      name: "contactsSection",
+      title: "قسم التواصل",
+      type: "object",
       options: { collapsible: true, collapsed: true },
-      of: [
-        {
-          type: "object",
-          fields: [
-            defineField({ name: "title", title: "العنوان", type: "string" }),
-            defineField({ name: "description", title: "الوصف", type: "string" }),
-            defineField({ name: "email", title: "البريد الإلكتروني", type: "string" }),
-            defineField({ name: "phone", title: "الهاتف", type: "string" }),
-            defineField({ name: "icon", title: "الأيقونة (من Lucide)", type: "string" }),
-            defineField({ name: "color", title: "لون النص", type: "string", initialValue: "text-blue-600" }),
-            defineField({ name: "bgColor", title: "لون الخلفية", type: "string", initialValue: "bg-blue-50" }),
+      fields: [
+        defineField({ name: "title", title: "عنوان القسم", type: "string", initialValue: "للتواصل والاستفسارات" }),
+        defineField({ name: "description", title: "وصف القسم", type: "text" }),
+        defineField({
+          name: "items",
+          title: "جهات الاتصال",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                defineField({ name: "title", title: "العنوان", type: "string" }),
+                defineField({ name: "description", title: "الوصف", type: "string" }),
+                defineField({ name: "email", title: "البريد الإلكتروني", type: "string" }),
+                defineField({ name: "phone", title: "الهاتف", type: "string" }),
+                defineField({ name: "icon", title: "الأيقونة (من Lucide)", type: "string" }),
+                defineField({ name: "color", title: "لون النص", type: "string", initialValue: "text-blue-600" }),
+                defineField({ name: "bgColor", title: "لون الخلفية", type: "string", initialValue: "bg-blue-50" }),
+              ],
+            },
           ],
-        },
-      ],
+        }),
+      ]
     }),
   ],
 })
