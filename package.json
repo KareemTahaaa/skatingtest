@@ -38,7 +38,7 @@
     "@radix-ui/react-toggle": "latest",
     "@radix-ui/react-toggle-group": "latest",
     "@radix-ui/react-tooltip": "latest",
-    "@sanity/client": "^6.24.1",
+    "@sanity/client": "^7.0.0",
     "@sanity/eslint-config-studio": "latest",
     "@sanity/image-url": "latest",
     "@sanity/types": "latest",
