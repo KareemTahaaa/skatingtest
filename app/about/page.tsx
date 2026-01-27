@@ -8,18 +8,18 @@ import LeadershipSection from "@/components/leadership-section"
 import AchievementsSection from "@/components/achievements-section"
 import StatsSection from "@/components/stats-section"
 import ContactSection from "@/components/contact-section"
-import { getAboutPageMeta, getSiteSettings } from "@/lib/sanity.queries"
+import { getAboutPageData, getSiteSettings } from "@/lib/sanity.queries"
 
 export const revalidate = 60
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
-    const [pageMeta, siteSettings] = await Promise.all([getAboutPageMeta(), getSiteSettings()])
+    const [pageData, siteSettings] = await Promise.all([getAboutPageData(), getSiteSettings()])
 
     return {
-      title: pageMeta?.metaTitle || `من نحن - ${siteSettings?.siteName || "الاتحاد المصري للتزلج"}`,
+      title: pageData?.metaTitle || `من نحن - ${siteSettings?.siteName || "الاتحاد المصري للتزلج"}`,
       description:
-        pageMeta?.metaDescription ||
+        pageData?.metaDescription ||
         "تعرف على الاتحاد المصري للتزلج، رسالتنا، رؤيتنا، وإنجازاتنا في تطوير رياضة التزلج في مصر",
     }
   } catch (error) {
