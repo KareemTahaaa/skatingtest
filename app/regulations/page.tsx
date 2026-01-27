@@ -8,6 +8,8 @@ import RegulationsDownload from "@/components/regulations-download"
 import RegulationsContact from "@/components/regulations-contact"
 import { getRegulations, getRegulationsPageMeta } from "@/lib/sanity.queries"
 
+export const revalidate = 0 // Always fetch fresh data
+
 export async function generateMetadata() {
   const pageMeta = await getRegulationsPageMeta()
 
