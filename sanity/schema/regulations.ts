@@ -172,7 +172,30 @@ export default defineType({
         defineField({ name: "description", title: "وصف القسم", type: "text" }),
         defineField({ name: "timelineTitle", title: "عنوان الجدول الزمني", type: "string", initialValue: "الجدول الزمني للتعديلات" }),
         defineField({ name: "notificationTitle", title: "عنوان الإشعار", type: "string", initialValue: "إشعار هام" }),
-        defineField({ name: "notificationText", title: "نص الإشعار", type: "text" }),
+        defineField({
+          name: "timelineSummary",
+          title: "ملخص الجدول الزمني",
+          type: "object",
+          fields: [
+            defineField({
+              name: "quarters",
+              title: "أرباع السنة",
+              type: "array",
+              of: [
+                {
+                  type: "object",
+                  fields: [
+                    defineField({ name: "label", title: "تسمية الفترة (مثال: Q1 2024)", type: "string" }),
+                    defineField({ name: "title", title: "العنوان (مثال: مراجعة شاملة)", type: "string" }),
+                  ],
+                  preview: {
+                    select: { title: "title", subtitle: "label" },
+                  },
+                },
+              ],
+            }),
+          ],
+        }),
         defineField({
           name: "amendments",
           title: "قائمة التعديلات",

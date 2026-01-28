@@ -664,6 +664,7 @@ export async function getRegulations() {
           disciplineRegulations,
           antiDopingRegulations,
           upcomingAmendments,
+          timelineSummary,
           downloadsSection {
             title,
             description,
