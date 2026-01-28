@@ -655,45 +655,70 @@ export async function getEventsPageMeta() {
 
 export async function getRegulations() {
   try {
-    const regulations = await client.fetch(
-      `*[_type == "regulations"] | order(_updatedAt desc)[0] {
-        hero,
-        tableOfContents,
-        generalRegulations,
-        disciplineRegulations,
-        antiDopingRegulations,
-        upcomingAmendments,
-        downloadsSection {
-          title,
-          description,
-          noteTitle,
-          noteContent,
-          documents[] {
+    const data = await client.fetch(
+      `{
+        "content": *[_type == "regulations"] | order(_updatedAt desc)[0] {
+          hero,
+          tableOfContents,
+          generalRegulations,
+          disciplineRegulations,
+          antiDopingRegulations,
+          upcomingAmendments,
+          downloadsSection {
             title,
-            file {
-              asset-> {
-                url,
-                size
+            description,
+            noteTitle,
+            noteContent,
+            documents[] {
+              title,
+              file {
+                asset-> {
+                  url,
+                  size
+                }
               }
+            }
+          },
+          contactsSection {
+            title,
+            description,
+            items[] {
+              title,
+              description,
+              email,
+              phone,
+              icon,
+              color,
+              bgColor
             }
           }
         },
-        contactsSection {
-          title,
-          description,
-          items[] {
-            title,
-            description,
-            email,
-            phone,
-            icon,
-            color,
-            bgColor
+        "page": *[_type == "regulationsPage"][0] {
+          heroTitle,
+          heroSubtitle,
+          heroImage {
+            asset-> {
+              url
+            }
           }
         }
-      }`,
+      }`
     )
-    return regulations || mockRegulations
+
+    const content = data.content || {}
+    const page = data.page || {}
+
+    // Merge page settings into hero
+    const mergedHero = {
+      title: page.heroTitle || content.hero?.title,
+      subtitle: page.heroSubtitle || content.hero?.subtitle,
+      backgroundImage: page.heroImage || content.hero?.backgroundImage,
+    }
+
+    return {
+      ...content,
+      hero: mergedHero,
+    } || mockRegulations
   } catch (error) {
     console.error("Error fetching regulations:", error)
     return mockRegulations
