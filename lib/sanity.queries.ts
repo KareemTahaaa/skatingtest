@@ -457,7 +457,8 @@ export async function getSocialMediaLinks() {
         facebook,
         instagram,
         twitter,
-        linkedin
+        linkedin,
+        youtube
       }`,
     )
     return links || {}

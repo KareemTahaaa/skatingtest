@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react"
+import { Facebook, Instagram, Youtube } from "lucide-react"
 import { getSiteSettings, getSocialMediaLinks } from "@/lib/sanity.queries"
 
 export default async function Footer() {
@@ -176,36 +176,20 @@ export default async function Footer() {
                 <span className="sr-only">انستجرام</span>
               </Link>
             )}
-            {socialLinks?.linkedin ? (
+            {socialLinks?.youtube ? (
               <Link
-                href={socialLinks.linkedin}
+                href={socialLinks.youtube}
                 className="hover:text-red-400"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">لينكد إن</span>
+                <Youtube className="h-5 w-5" />
+                <span className="sr-only">يوتيوب</span>
               </Link>
             ) : (
               <Link href="#" className="hover:text-red-400">
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">لينكد إن</span>
-              </Link>
-            )}
-            {socialLinks?.twitter ? (
-              <Link
-                href={socialLinks.twitter}
-                className="hover:text-red-400"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">تويتر</span>
-              </Link>
-            ) : (
-              <Link href="#" className="hover:text-red-400">
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">تويتر</span>
+                <Youtube className="h-5 w-5" />
+                <span className="sr-only">يوتيوب</span>
               </Link>
             )}
           </div>

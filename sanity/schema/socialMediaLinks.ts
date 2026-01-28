@@ -25,5 +25,10 @@ export default defineType({
             title: "لينكد إن",
             type: "url",
         }),
+        defineField({
+            name: "youtube",
+            title: "يوتيوب",
+            type: "url",
+        }),
     ],
 })
