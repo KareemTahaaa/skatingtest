@@ -67,7 +67,7 @@ export default defineConfig({
                 ![
                   'siteSettings',
                   'homePage',
-                  'about',
+                  // 'about', // Un-filtered to allow finding "lost" documents
                   'contact',
                   'eventsPageSingleton',
                   'newsPage',
