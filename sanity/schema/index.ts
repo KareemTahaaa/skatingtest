@@ -1,6 +1,5 @@
 import blockContent from "./blockContent"
 import author from "./author"
-import category from "./category"
 import sportDiscipline from "./sportDiscipline"
 import event from "./event"
 import news from "./news"
@@ -11,14 +10,15 @@ import homePage from "./homePage"
 import about from "./about"
 import contact from "./contact"
 import newsPage from "./newsPage"
-import eventsPage from "./eventsPage"
+import eventsPageSingleton from "./eventsPageSingleton"
 import regulationsPage from "./regulationsPage"
 import result from "./result"
+import regulations from "./regulations"
+import socialMediaLinks from "./socialMediaLinks"
 
 export const schemaTypes = [
   blockContent,
   author,
-  category,
   sportDiscipline,
   event,
   news,
@@ -29,9 +29,11 @@ export const schemaTypes = [
   about,
   contact,
   newsPage,
-  eventsPage,
+  eventsPageSingleton,
   regulationsPage,
   result,
+  regulations,
+  socialMediaLinks,
 ]
 
 export default schemaTypes

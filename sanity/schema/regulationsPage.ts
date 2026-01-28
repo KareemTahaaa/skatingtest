@@ -1,39 +1,38 @@
 import { defineField, defineType } from "sanity"
 
 export default defineType({
-    name: "eventsPage",
-    title: "صفحة الفعاليات",
+    name: "regulationsPage",
+    title: "صفحة اللوائح",
     type: "document",
     fields: [
         defineField({
             name: "metaTitle",
             title: "العنوان التعريفي (SEO)",
             type: "string",
-            description: "عنوان محركات البحث لصفحة الفعاليات",
+            description: "عنوان محركات البحث لصفحة اللوائح",
         }),
         defineField({
             name: "metaDescription",
             title: "الوصف التعريفي (SEO)",
             type: "text",
-            description: "وصف محركات البحث لصفحة الفعاليات",
+            description: "وصف محركات البحث لصفحة اللوائح",
         }),
         defineField({
             name: "heroTitle",
             title: "عنوان القسم الرئيسي",
             type: "string",
-            initialValue: "الفعاليات",
+            initialValue: "اللوائح والقوانين",
         }),
         defineField({
-            name: "heroDescription",
-            title: "وصف القسم الرئيسي",
-            type: "text",
-            rows: 3,
+            name: "heroSubtitle",
+            title: "العنوان الفرعي للقسم الرئيسي",
+            type: "string",
+            initialValue: "جميع القوانين واللوائح المنظمة لأنشطة الاتحاد المصري للتزلج",
         }),
         defineField({
-            name: "backgroundImage",
+            name: "heroImage",
             title: "صورة الخلفية الرئيسية",
             type: "image",
-            description: "صورة خلفية القسم الرئيسي (Hero) في صفحة الفعاليات",
             options: {
                 hotspot: true,
             },

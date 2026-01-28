@@ -46,17 +46,17 @@ export const accessRules = {
       create: hasRole('administrator'),
       read: isAuthenticated,
       update: ({ currentUser }: { currentUser: any }) => {
-        return currentUser.roles.some(role => 
+        return currentUser.roles.some(role =>
           ['administrator', 'editor'].includes(role.name)
         )
       },
       delete: hasRole('administrator'),
     },
-    eventsPage: {
+    eventsPageSingleton: {
       create: hasRole('administrator'),
       read: isAuthenticated,
       update: ({ currentUser }: { currentUser: any }) => {
-        return currentUser.roles.some(role => 
+        return currentUser.roles.some(role =>
           ['administrator', 'editor'].includes(role.name)
         )
       },
@@ -66,7 +66,7 @@ export const accessRules = {
       create: hasRole('administrator'),
       read: isAuthenticated,
       update: ({ currentUser }: { currentUser: any }) => {
-        return currentUser.roles.some(role => 
+        return currentUser.roles.some(role =>
           ['administrator', 'editor'].includes(role.name)
         )
       },
@@ -76,7 +76,7 @@ export const accessRules = {
       create: hasRole('administrator'),
       read: isAuthenticated,
       update: ({ currentUser }: { currentUser: any }) => {
-        return currentUser.roles.some(role => 
+        return currentUser.roles.some(role =>
           ['administrator', 'editor'].includes(role.name)
         )
       },
@@ -86,7 +86,7 @@ export const accessRules = {
       create: hasRole('administrator'),
       read: isAuthenticated,
       update: ({ currentUser }: { currentUser: any }) => {
-        return currentUser.roles.some(role => 
+        return currentUser.roles.some(role =>
           ['administrator', 'editor'].includes(role.name)
         )
       },
@@ -98,7 +98,7 @@ export const accessRules = {
       create: hasRole('administrator'),
       read: isAuthenticated,
       update: ({ currentUser }: { currentUser: any }) => {
-        return currentUser.roles.some(role => 
+        return currentUser.roles.some(role =>
           ['administrator', 'editor'].includes(role.name)
         )
       },
@@ -108,13 +108,13 @@ export const accessRules = {
     // Events - administrators and editors can create/edit
     event: {
       create: ({ currentUser }: { currentUser: any }) => {
-        return currentUser.roles.some(role => 
+        return currentUser.roles.some(role =>
           ['administrator', 'editor'].includes(role.name)
         )
       },
       read: isAuthenticated,
       update: ({ currentUser }: { currentUser: any }) => {
-        return currentUser.roles.some(role => 
+        return currentUser.roles.some(role =>
           ['administrator', 'editor'].includes(role.name)
         )
       },
@@ -134,7 +134,7 @@ export const accessRules = {
       create: hasRole('administrator'),
       read: isAuthenticated,
       update: ({ currentUser }: { currentUser: any }) => {
-        return currentUser.roles.some(role => 
+        return currentUser.roles.some(role =>
           ['administrator', 'editor'].includes(role.name)
         )
       },
@@ -152,13 +152,13 @@ export const accessRules = {
     // Quotes - administrators and editors can manage
     quote: {
       create: ({ currentUser }: { currentUser: any }) => {
-        return currentUser.roles.some(role => 
+        return currentUser.roles.some(role =>
           ['administrator', 'editor'].includes(role.name)
         )
       },
       read: isAuthenticated,
       update: ({ currentUser }: { currentUser: any }) => {
-        return currentUser.roles.some(role => 
+        return currentUser.roles.some(role =>
           ['administrator', 'editor'].includes(role.name)
         )
       },
