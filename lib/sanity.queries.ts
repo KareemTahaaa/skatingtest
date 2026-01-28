@@ -524,88 +524,41 @@ export async function getAboutPageData() {
   }
 
   try {
-    const data = await client.fetch(
-      `*[_type == "about"][0] {
+    console.log("[About Page] Attempting to fetch all 'about' documents from Sanity...")
+    const documents = await client.fetch(
+      `*[_type == "about"] {
+        _id,
+        _createdAt,
         metaTitle,
-        metaDescription,
         heroTitle,
-        heroDescription,
         backgroundImage {
           asset->{
             url
           }
         },
-        missionSectionTitle,
-        missionSectionSubtitle,
-        missionTitle,
-        missionContent,
-        visionTitle,
-        visionContent,
-        valuesTitle,
-        valuesContent,
-        historyTitle,
-        historySubtitle,
-        historyContent,
-        historyImage {
-          asset->{
-            url
-          }
-        },
-        milestones[] {
-            year,
-            title,
-            description
-        },
-        statsTitle,
-        statsSubtitle,
-        stats[] {
-            label,
-            value,
-            icon,
-            description
-        },
-        leadership {
-          title,
-          subtitle,
-          members[] {
-            name,
-            position,
-            bio,
-            email,
-            phone,
-            image {
-              asset->{
-                url
-              }
-            }
-          }
-        },
-        achievements {
-          achievementsTitle,
-          achievementsSubtitle,
-          achievementsImage {
-            asset->{
-              url
-            }
-          },
-          items[] {
-            title,
-            description,
-            year,
-            type,
-            image {
-              asset->{
-                url
-              }
-            }
-          }
-        }
-      }`,
+        ...
+      }`
     )
+
+    console.log(`[About Page] Found ${documents?.length || 0} 'about' documents`)
+    if (documents && documents.length > 0) {
+      documents.forEach((doc: any, index: number) => {
+        console.log(`[About Page] Doc ${index}: ID=${doc._id}, Title=${doc.heroTitle || "No Title"}, CreatedAt=${doc._createdAt}`)
+      })
+    }
+
+    // Pick the one that has content (prefer one with heroTitle or not the default 'about' ID if others exist)
+    const data = documents?.find((doc: any) => doc.heroTitle && doc._id !== 'about') ||
+      documents?.find((doc: any) => doc.heroTitle) ||
+      documents?.[0]
+
+    if (data) {
+      console.log(`[About Page] ✓ Selected document ID: ${data._id}`)
+    }
 
     return data || mockAboutData
   } catch (error) {
-    console.error("Error fetching about page data:", error)
+    console.error("[About Page] ✗ Fetch error:", error)
     return mockAboutData
   }
 }
