@@ -487,12 +487,44 @@ export async function getHomePageMeta() {
 }
 
 export async function getAboutPageData() {
+  const mockAboutData = {
+    metaTitle: "من نحن - الاتحاد المصري للتزلج",
+    metaDescription: "تعرف على الاتحاد المصري للتزلج، رسالتنا، رؤيتنا، وإنجازاتنا",
+    heroTitle: "من نحن",
+    heroDescription: "الاتحاد المصري للتزلج",
+    missionSectionTitle: "رسالتنا ورؤيتنا",
+    missionSectionSubtitle: "نسعى لتطوير رياضة التزلج في مصر",
+    missionTitle: "رسالتنا",
+    missionContent: "تطوير وتعزيز رياضة التزلج في مصر",
+    visionTitle: "رؤيتنا",
+    visionContent: "أن نكون الاتحاد الرائد في المنطقة",
+    valuesTitle: "قيمنا",
+    valuesContent: "التميز، الاحترافية، والتطوير المستمر",
+    statsTitle: "إحصائياتنا",
+    statsSubtitle: "أرقام تعكس إنجازاتنا",
+    stats: [],
+    historyTitle: "تاريخنا",
+    historySubtitle: "رحلة من الإنجازات",
+    historyContent: "تأسس الاتحاد المصري للتزلج لتطوير الرياضة في مصر",
+    milestones: [],
+    leadership: {
+      title: "القيادة",
+      subtitle: "فريق العمل",
+      members: []
+    },
+    achievements: {
+      achievementsTitle: "إنجازاتنا",
+      achievementsSubtitle: "نفخر بما حققناه",
+      items: []
+    }
+  }
+
   if (useMockData()) {
-    return null
+    return mockAboutData
   }
 
   try {
-    return await client.fetch(
+    const data = await client.fetch(
       `*[_type == "about"][0] {
         metaTitle,
         metaDescription,
@@ -570,9 +602,11 @@ export async function getAboutPageData() {
         }
       }`,
     )
+
+    return data || mockAboutData
   } catch (error) {
-    console.error("Error fetching about page metadata:", error)
-    return null
+    console.error("Error fetching about page data:", error)
+    return mockAboutData
   }
 }
 
