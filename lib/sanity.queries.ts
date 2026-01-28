@@ -547,9 +547,14 @@ export async function getAboutPageData() {
       })
     }
 
-    // Pick the one that has content (prefer one with heroTitle or not the default 'about' ID if others exist)
-    const data = documents?.find((doc: any) => doc.heroTitle && doc._id !== 'about') ||
-      documents?.find((doc: any) => doc.heroTitle) ||
+    // Priority Selection:
+    // 1. Singleton document with ID 'about' (if it has metaTitle or heroTitle)
+    // 2. Any published document with content
+    // 3. Drafts with content
+    // 4. Any document at all
+    const data = documents?.find((doc: any) => doc._id === 'about' && (doc.heroTitle || doc.metaTitle)) ||
+      documents?.find((doc: any) => !doc._id.startsWith('drafts.') && (doc.heroTitle || doc.metaTitle)) ||
+      documents?.find((doc: any) => doc.heroTitle || doc.metaTitle) ||
       documents?.[0]
 
     if (data) {
