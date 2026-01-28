@@ -586,6 +586,9 @@ export async function getContactPageData() {
       `*[_type == "contact"][0] {
         metaTitle,
         metaDescription,
+        phone,
+        email,
+        address,
         hero {
           title,
           subtitle,
