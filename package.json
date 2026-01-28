@@ -60,6 +60,7 @@
     "react-hook-form": "latest",
     "react-resizable-panels": "latest",
     "recharts": "latest",
+    "resend": "6.9.1",
     "sanity": "^3.0.0",
     "sonner": "latest",
     "styled-components": "^6.1.14",

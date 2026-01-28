@@ -8,7 +8,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Send, CheckCircle } from "lucide-react"
 
 export default function ContactForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -19,15 +21,26 @@ export default function ContactForm() {
     message: "",
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send the form data to your backend
-    console.log("Form submitted:", formData)
-    setIsSubmitted(true)
+    setIsSubmitting(true)
+    setError(null)
 
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to send message")
+      }
+
+      setIsSubmitted(true)
+      // Reset form
       setFormData({
         firstName: "",
         lastName: "",
@@ -37,7 +50,12 @@ export default function ContactForm() {
         department: "",
         message: "",
       })
-    }, 3000)
+    } catch (err) {
+      console.error("Submission error:", err)
+      setError("حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى لاحقاً.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -185,9 +203,21 @@ export default function ContactForm() {
             ></textarea>
           </div>
 
-          <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
-            <Send className="h-4 w-4 ml-2" />
-            إرسال الرسالة
+          {error && (
+            <div className="p-3 bg-red-100 border border-red-200 text-red-700 rounded-md text-sm text-center">
+              {error}
+            </div>
+          )}
+
+          <Button type="submit" className="w-full bg-red-600 hover:bg-red-700" disabled={isSubmitting}>
+            {isSubmitting ? (
+              <>جارٍ الإرسال...</>
+            ) : (
+              <>
+                <Send className="h-4 w-4 ml-2" />
+                إرسال الرسالة
+              </>
+            )}
           </Button>
         </form>
       </CardContent>
