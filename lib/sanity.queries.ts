@@ -530,13 +530,79 @@ export async function getAboutPageData() {
         _id,
         _createdAt,
         metaTitle,
+        metaDescription,
         heroTitle,
+        heroDescription,
         backgroundImage {
           asset->{
             url
           }
         },
-        ...
+        missionSectionTitle,
+        missionSectionSubtitle,
+        missionTitle,
+        missionContent,
+        visionTitle,
+        visionContent,
+        valuesTitle,
+        valuesContent,
+        historyTitle,
+        historySubtitle,
+        historyContent,
+        historyImage {
+          asset->{
+            url
+          }
+        },
+        milestones[] {
+            year,
+            title,
+            description
+        },
+        statsTitle,
+        statsSubtitle,
+        stats[] {
+            label,
+            value,
+            icon,
+            description
+        },
+        leadership {
+          title,
+          subtitle,
+          members[] {
+            name,
+            position,
+            bio,
+            email,
+            phone,
+            image {
+              asset->{
+                url
+              }
+            }
+          }
+        },
+        achievements {
+          achievementsTitle,
+          achievementsSubtitle,
+          achievementsImage {
+            asset->{
+              url
+            }
+          },
+          items[] {
+            title,
+            description,
+            year,
+            type,
+            image {
+              asset->{
+                url
+              }
+            }
+          }
+        }
       }`
     )
 
