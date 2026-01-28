@@ -6,7 +6,7 @@ import QuoteSectionContainer from "@/components/quote-section-container"
 import UpcomingEvents from "@/components/upcoming-events"
 import NewsGrid from "@/components/news-grid"
 import ContactSection from "@/components/contact-section"
-import { getAllNews, getAllEvents } from "@/lib/sanity.queries"
+import { getAllNews, getAllEvents, getContactPageData } from "@/lib/sanity.queries"
 import { getHomePageMeta, getSiteSettings } from "@/lib/sanity.queries"
 
 export const revalidate = 60
@@ -32,12 +32,19 @@ export default async function Home() {
   let news = []
   let events = []
   let siteSettings = null
+  let contactData = null
 
   try {
-    const [newsData, eventsData, settingsData] = await Promise.all([getAllNews(), getAllEvents(), getSiteSettings()])
+    const [newsData, eventsData, settingsData, contactInfo] = await Promise.all([
+      getAllNews(),
+      getAllEvents(),
+      getSiteSettings(),
+      getContactPageData(),
+    ])
     news = newsData
     events = eventsData
     siteSettings = settingsData
+    contactData = contactInfo
   } catch (error) {
     console.error("Error fetching data:", error)
   }
@@ -70,7 +77,7 @@ export default async function Home() {
       {/* Events Section - Now positioned after News */}
       <UpcomingEvents events={upcomingEvents} />
 
-      <ContactSection />
+      <ContactSection contactInfo={{ phone: contactData?.phone, email: contactData?.email, address: contactData?.address }} />
     </main>
   )
 }
