@@ -7,11 +7,9 @@ interface ContactSectionProps {
 }
 
 export default function ContactSection({ contactInfo }: ContactSectionProps) {
-  const email = contactInfo?.email?.[0]?.address || "info@ensf.com"
-  const phone = contactInfo?.phone?.[0]?.number || "+20 100 123 4567"
-  const address = contactInfo?.address?.city
-    ? `${contactInfo.address.city}, ${contactInfo.address.country || "مصر"}`
-    : "القاهرة، مصر"
+  const email = contactInfo?.email || "info@ensf.com"
+  const phone = contactInfo?.phone || "+20 100 123 4567"
+  const address = contactInfo?.address || "القاهرة، مصر"
 
   return (
     <section className="py-16 bg-gradient-to-l from-red-600 to-red-700">

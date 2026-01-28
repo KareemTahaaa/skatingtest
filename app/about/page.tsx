@@ -6,7 +6,7 @@ import LeadershipSection from "@/components/leadership-section"
 import AchievementsSection from "@/components/achievements-section"
 import StatsSection from "@/components/stats-section"
 import ContactSection from "@/components/contact-section"
-import { getAboutPageData, getSiteSettings } from "@/lib/sanity.queries"
+import { getAboutPageData, getSiteSettings, getContactPageData } from "@/lib/sanity.queries"
 
 export const revalidate = 60
 
@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const aboutData = await getAboutPageData()
+  const [aboutData, contactData] = await Promise.all([getAboutPageData(), getContactPageData()])
 
   return (
     <main className="min-h-screen bg-gray-100">
@@ -60,7 +60,7 @@ export default async function AboutPage() {
       />
       <LeadershipSection data={aboutData?.leadership} />
       <AchievementsSection data={aboutData?.achievements} />
-      <ContactSection />
+      <ContactSection contactInfo={{ phone: contactData?.phone, email: contactData?.email, address: contactData?.address }} />
     </main>
   )
 }
