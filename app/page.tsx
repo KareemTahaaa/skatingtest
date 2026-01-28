@@ -70,7 +70,7 @@ export default async function Home() {
       {/* Events Section - Now positioned after News */}
       <UpcomingEvents events={upcomingEvents} />
 
-      <ContactSection contactInfo={siteSettings?.contactInfo} />
+      <ContactSection />
     </main>
   )
 }
