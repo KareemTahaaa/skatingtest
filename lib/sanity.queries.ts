@@ -698,7 +698,7 @@ export async function getEventsPageMeta() {
 
   try {
     return await client.fetch(
-      `*[_type == "eventsPage"][0] {
+      `*[_type == "eventsPageSingleton"][0] {
         metaTitle,
         metaDescription,
         heroTitle,
