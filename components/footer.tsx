@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Facebook, Instagram, Youtube } from "lucide-react"
-import { getSiteSettings, getSocialMediaLinks } from "@/lib/sanity.queries"
+import { getSiteSettings, getSocialMediaLinks, getContactPageData } from "@/lib/sanity.queries"
 
 export default async function Footer() {
   let settings = null
