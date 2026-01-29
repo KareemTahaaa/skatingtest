@@ -10,36 +10,39 @@ export default function ContactInfo({ data }: ContactInfoProps) {
     {
       icon: MapPin,
       title: "العنوان",
-      details: data?.address ? [
-        data.address.street,
-        `${data.address.city || ''} ${data.address.country || ''} ${data.address.postalCode || ''}`
-      ].filter(Boolean) : ["256A شارع الهرم، الجيزة", "القاهرة، مصر 12345"],
+      details: typeof data?.address === "string"
+        ? [data.address]
+        : (data?.address ? [data.address.street, `${data.address.city || ''} ${data.address.country || ''}`].filter(Boolean) : ["85 أ شارع محطة الزيتون - الدور الثاني - شقة 21 - الزيتون - القاهرة"]),
       color: "text-blue-600",
       bgColor: "bg-blue-50",
     },
     {
       icon: Phone,
       title: "الهاتف",
-      details: data?.phone?.map((p: any) => p.number) || ["+20 2 1234 5678", "+20 100 123 4567"],
+      details: typeof data?.phone === "string"
+        ? [data.phone]
+        : (Array.isArray(data?.phone) ? data.phone.map((p: any) => p.number) : ["0226368205"]),
       color: "text-green-600",
       bgColor: "bg-green-50",
     },
     {
       icon: Mail,
       title: "البريد الإلكتروني",
-      details: data?.email?.map((e: any) => e.address) || ["info@ensf.com", "contact@ensf.com"],
+      details: typeof data?.email === "string"
+        ? [data.email]
+        : (Array.isArray(data?.email) ? data.email.map((e: any) => e.address) : ["secretariat@egyptskate.org"]),
       color: "text-red-600",
       bgColor: "bg-red-50",
     },
     {
       icon: MessageCircle,
       title: "واتساب",
-      details: data?.whatsapp?.map((w: any) => w.number) || ["+20 100 123 4567", "متاح 24/7"],
+      details: typeof data?.whatsapp === "string"
+        ? [data.whatsapp]
+        : (Array.isArray(data?.whatsapp) ? data.whatsapp.map((w: any) => w.number) : ["01553194429"]),
       color: "text-green-600",
       bgColor: "bg-green-50",
     },
-
-
   ]
 
   return (

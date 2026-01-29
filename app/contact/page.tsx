@@ -62,7 +62,15 @@ export default async function ContactPage() {
             <ContactForm />
           </div>
           <div className="lg:col-span-1">
-            <ContactInfo data={siteSettings?.contactInfo} />
+            <ContactInfo
+              data={{
+                ...siteSettings?.contactInfo,
+                phone: pageData?.phone || siteSettings?.contactInfo?.phone,
+                email: pageData?.email || siteSettings?.contactInfo?.email,
+                address: pageData?.address || siteSettings?.contactInfo?.address,
+                whatsapp: pageData?.whatsapp || siteSettings?.contactInfo?.whatsapp,
+              }}
+            />
           </div>
         </div>
 
