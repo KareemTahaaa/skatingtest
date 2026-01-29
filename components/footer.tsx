@@ -8,11 +8,20 @@ export default async function Footer() {
   let socialLinks = null
 
   try {
-    const [settingsData, socialData] = await Promise.all([
+    const [settingsData, socialData, contactPageData] = await Promise.all([
       getSiteSettings(),
-      getSocialMediaLinks()
+      getSocialMediaLinks(),
+      getContactPageData()
     ])
-    settings = settingsData
+    settings = {
+      ...settingsData,
+      contactInfo: {
+        ...settingsData?.contactInfo,
+        phone: contactPageData?.phone ? [{ number: contactPageData.phone }] : settingsData?.contactInfo?.phone,
+        email: contactPageData?.email ? [{ address: contactPageData.email }] : settingsData?.contactInfo?.email,
+        address: contactPageData?.address ? { street: contactPageData.address } : settingsData?.contactInfo?.address,
+      }
+    }
     socialLinks = socialData
   } catch (error) {
     console.error("Failed to fetch footer data:", error)
