@@ -20,6 +20,7 @@ export default async function Footer() {
         phone: contactPageData?.phone ? [{ number: contactPageData.phone }] : settingsData?.contactInfo?.phone,
         email: contactPageData?.email ? [{ address: contactPageData.email }] : settingsData?.contactInfo?.email,
         address: contactPageData?.address ? { street: contactPageData.address } : settingsData?.contactInfo?.address,
+        whatsapp: contactPageData?.whatsapp ? [{ number: contactPageData.whatsapp }] : settingsData?.contactInfo?.whatsapp,
       }
     }
     socialLinks = socialData

@@ -648,6 +648,7 @@ export async function getContactPageData() {
         phone,
         email,
         address,
+        whatsapp,
         hero {
           title,
           subtitle,

@@ -45,6 +45,11 @@ export default defineType({
       type: "text",
     }),
     defineField({
+      name: "whatsapp",
+      title: "رقم واتساب",
+      type: "string",
+    }),
+    defineField({
       name: "hero",
       title: "قسم الصورة الرئيسية",
       type: "object",
