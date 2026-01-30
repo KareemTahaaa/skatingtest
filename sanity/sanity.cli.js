@@ -8,5 +8,6 @@ export default defineCliConfig({
   api: {
     projectId: '0ujc3v49',
     dataset: 'production'
-  }
+  },
+  studioHost: 'skating'
 })
