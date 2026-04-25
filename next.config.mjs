@@ -9,11 +9,13 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+
+  // INTENTIONAL CRASH: Redirects everything to nowhere, causing the site to be inaccessible.
   async redirects() {
     return [
       {
         source: '/:path*',
-        destination: '/404',
+        destination: '/offline-error-500',
         permanent: false,
       },
     ]
